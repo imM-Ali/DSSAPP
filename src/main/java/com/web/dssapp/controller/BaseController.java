@@ -7,18 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.web.dssapp.model.movie;
-import com.web.dssapp.repository.mongoRepo;
+import com.web.dssapp.model.Movie;
+import com.web.dssapp.repository.MongoRepo;
 
 @Controller
-public class baseController {
+public class BaseController {
 
 	@Autowired
-	mongoRepo _db;
+	MongoRepo _db;
 	
 	@GetMapping("/")
     public String home(Model model){
-		List<movie> allMovies = _db.findAll();
+		List<Movie> allMovies = _db.findAll();
 		model.addAttribute("movies", allMovies);
         return "index";
     }

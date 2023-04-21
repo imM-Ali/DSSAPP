@@ -2,8 +2,8 @@ package com.web.dssapp.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.web.dssapp.model.movie;
+import com.web.dssapp.model.Movie;
 
-public interface mongoRepo extends MongoRepository<movie, Integer> {
+public interface MongoRepo extends MongoRepository<Movie, Integer> {
 
 }

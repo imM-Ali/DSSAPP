@@ -6,16 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Data
 @Document(collection="moviesData")
-public class movie {
+public class Movie {
 	
 	@Id
 	private String Id;
 	private int movieId;
 	private String titleAndGenre;
+		
+	public Movie(String Id, int movieId, String titleAndGenre) {
+		this.Id = Id;
+		this.movieId = movieId;
+		this.titleAndGenre = titleAndGenre;
+	}
 	
 	public int getMovieId() {
 		return movieId;
