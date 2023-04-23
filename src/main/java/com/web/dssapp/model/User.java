@@ -2,11 +2,13 @@ package com.web.dssapp.model;
 
 import lombok.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.*;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+
 
 
 
@@ -21,23 +23,19 @@ public class User
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+  
     private long id;
 
-    @Column(nullable=false)
+    
     private String name;
 
-    @Column(nullable=false, unique=true)
+    
     private String email;
 
-    @Column(nullable=false)
+    
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-    @JoinTable(
-            name="users_roles",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+  
     private List<Role> roles = new ArrayList<>();
     
     public User(int id, String name, String email, String password) {
@@ -46,5 +44,51 @@ public class User
     	this.email = email;
     	this.password = password;
     }
+
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Collection<Role> getRoles() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setName(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEmail(String email2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setPassword(String encode) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setRoles(List<Role> asList) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 }

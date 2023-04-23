@@ -20,12 +20,12 @@ public class SpringSecurity {
     private UserDetailsService userDetailsService;
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
+     static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
@@ -33,8 +33,8 @@ public class SpringSecurity {
                                 .requestMatchers("/users").hasRole("ADMIN")
                 ).formLogin(
                         form -> form
-                                .loginPage("/login")
-                                .loginProcessingUrl("/login")
+                                .loginPage("/home")
+                                .loginProcessingUrl("/home")
                                 .defaultSuccessUrl("/users")
                                 .permitAll()
                 ).logout(
