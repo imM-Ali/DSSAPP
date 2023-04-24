@@ -14,45 +14,44 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-    @Bean
-     static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-    @Bean
-    AuthenticationProvider authenticationProvider() {
-    	DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-    	provider.setUserDetailsService(userDetailsService);
-    	provider.setPasswordEncoder(new BCryptPasswordEncoder());
-    	return provider;
-    }
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .authorizeHttpRequests((authz) -> {
-				try {
-					authz
-					    .anyRequest().authenticated()
-					    .and().formLogin().defaultSuccessUrl("/movies", true).and()
-					
-					.httpBasic();
-				} catch (Exception e) {
-					System.out.println(e.getMessage());
-				}
-			});
-        return http.build();
-    }
-	 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(passwordEncoder());
-    }
+	@Bean
+	static PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	AuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+		provider.setUserDetailsService(userDetailsService);
+		provider.setPasswordEncoder(new BCryptPasswordEncoder());
+		return provider;
+	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((authz) -> {
+			try {
+				authz.anyRequest().authenticated().and().formLogin(login -> login.defaultSuccessUrl("/movies", true))
+
+						.httpBasic(withDefaults());
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		});
+		return http.build();
+	}
+
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
 }
