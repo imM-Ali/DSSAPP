@@ -32,19 +32,22 @@ public class SpringSecurity {
     	provider.setPasswordEncoder(new BCryptPasswordEncoder());
     	return provider;
     }
-    
-     
-	  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-	  http.csrf().disable() 
-	  .authorizeHttpRequests((request) ->
-	  request.requestMatchers("/register/**").permitAll()
-	  .requestMatchers("/").permitAll()
-	  .requestMatchers("/users").hasRole("ADMIN")
-	  .requestMatchers("/moviespage").hasRole("USER")
-			  ).formLogin( form -> form
-	  .loginPage("/login") .loginProcessingUrl("/login") .defaultSuccessUrl("/movies")
-	  .permitAll() ).logout( logout -> logout .logoutRequestMatcher(new
-	  AntPathRequestMatcher("/logout")) .permitAll() ); return http.build(); }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests((authz) -> {
+				try {
+					authz
+					    .anyRequest().authenticated()
+					    .and().formLogin().defaultSuccessUrl("/movies", true).and()
+					
+					.httpBasic();
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			});
+        return http.build();
+    }
 	 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
