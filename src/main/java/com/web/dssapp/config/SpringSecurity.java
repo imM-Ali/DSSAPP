@@ -3,6 +3,8 @@ package com.web.dssapp.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,28 +25,27 @@ public class SpringSecurity {
      static PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
     @Bean
-     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("/register/**").permitAll()
-                                .requestMatchers("/index").permitAll()
-                                .requestMatchers("/users").hasRole("ADMIN")
-                ).formLogin(
-                        form -> form
-                                .loginPage("/home")
-                                .loginProcessingUrl("/home")
-                                .defaultSuccessUrl("/users")
-                                .permitAll()
-                ).logout(
-                        logout -> logout
-                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                                .permitAll()
-                );
-        return http.build();
+    AuthenticationProvider authenticationProvider() {
+    	DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    	provider.setUserDetailsService(userDetailsService);
+    	provider.setPasswordEncoder(new BCryptPasswordEncoder());
+    	return provider;
     }
-
+    
+     
+	  SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	  http.csrf().disable() 
+	  .authorizeHttpRequests((request) ->
+	  request.requestMatchers("/register/**").permitAll()
+	  .requestMatchers("/").permitAll()
+	  .requestMatchers("/users").hasRole("ADMIN")
+	  .requestMatchers("/moviespage").hasRole("USER")
+			  ).formLogin( form -> form
+	  .loginPage("/login") .loginProcessingUrl("/login") .defaultSuccessUrl("/movies")
+	  .permitAll() ).logout( logout -> logout .logoutRequestMatcher(new
+	  AntPathRequestMatcher("/logout")) .permitAll() ); return http.build(); }
+	 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth

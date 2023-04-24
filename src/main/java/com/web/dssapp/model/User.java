@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 
 
@@ -17,77 +20,49 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Document(collection="user")
+@Document(collection="users")
 public class User
 {
-    private static final long serialVersionUID = 1L;
+   
 
-    @Id
-  
-    private long id;
-
-    
+    @Field(targetType = FieldType.OBJECT_ID)
+    private ObjectId id;
     private String name;
-
-    
     private String email;
-
-    
     private String password;
-
-  
     private List<Role> roles = new ArrayList<>();
-    
-    public User(int id, String name, String email, String password) {
-    	this.id = id;
-    	this.name = name;
-    	this.email = email;
-    	this.password = password;
-    }
-
-	public User() {
-		// TODO Auto-generated constructor stub
+	public ObjectId getId() {
+		return id;
 	}
-
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setId(ObjectId id) {
+		this.id = id;
 	}
-
-	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Collection<Role> getRoles() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setName(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setEmail(String email2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setPassword(String encode) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setRoles(List<Role> asList) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getRoles() {
+		return roles.toString();
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+  
+	
 
 
 

@@ -46,6 +46,9 @@ import org.springframework.stereotype.Controller; import
   userService.saveUser(user); return "redirect:/register?success"; }
   
   @GetMapping("/users") public String listRegisteredUsers(Model model){
+	  
+	  
+	  
   List<UserDto> users = userService.findAllUsers(); model.addAttribute("users",
   users); return "users"; } }
  
