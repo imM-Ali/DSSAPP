@@ -30,9 +30,16 @@ public class MovieController {
 
 	@PostMapping("/addMovie")
 	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {
-		engine.addMovie(movie);
-		redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
-		return "redirect:/addMovie";
+		Optional<Movie> found= engine.getMovieById(movie.getMovie_Id());
+		if( found != null) {			
+			redirAttrs.addFlashAttribute("status", "Movie ID already exists");
+			return "redirect:/addMovie";
+		}else {
+			engine.addMovie(movie);
+			redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
+			return "redirect:/addMovie";
+		}
+		
 	}
 
 	@GetMapping("/movies/{id}")
