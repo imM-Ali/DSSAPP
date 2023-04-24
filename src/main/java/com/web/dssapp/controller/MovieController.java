@@ -42,6 +42,16 @@ public class MovieController {
 		
 	}
 
+	@GetMapping("/editmovie/{id}")
+	public String editMovie(@PathVariable("id") int id, Model model) {		
+		Optional<Movie> oldMov = engine.getMovieById(id);
+		model.addAttribute("movie", oldMov);
+		return "editmoviepage";
+		
+	}
+	
+	
+	
 	@GetMapping("/movies/{id}")
 	public Optional<Movie> getMovieById(@PathVariable("id") int id) {
 		return engine.getMovieById(id);

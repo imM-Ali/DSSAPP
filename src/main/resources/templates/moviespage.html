@@ -15,7 +15,9 @@
 		<div class="row">
 			<h1 class="text-center">Welcome to IMDB junior</h1>
 		</div>
-		<button th:action="@{/addMovie}">Add Movie</button>
+		<a th:href="@{/addMovie}">
+			<button>Add Movie</button>
+		</a>
 		<table>
 			<thead>
 				<tr>
@@ -30,8 +32,12 @@
 					<td th:text="${movie.movie_Id}"></td>
 					<td th:text="${movie.Genre}"></td>
 					<td th:text="${movie.Title}"></td>
-					<td><button>Edit</button></td>
-					<td><button>Delete</button></td>
+					<td><a th:href="@{|/editmovie/${movie.movie_Id}|}">
+							<button>Edit</button>
+					</a></td>
+					<td><a th:href="@{/addMovie}">
+							<button>Delete</button>
+					</a></td>
 				</tr>
 			</tbody>
 		</table>
