@@ -11,7 +11,6 @@ import java.util.List;
 
 @Setter
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Document(collection="role")
