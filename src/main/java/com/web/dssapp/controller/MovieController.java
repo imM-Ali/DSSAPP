@@ -43,14 +43,32 @@ public class MovieController {
 	}
 
 	@GetMapping("/editmovie/{id}")
-	public String editMovie(@PathVariable("id") int id, Model model) {		
+	public String editMovie(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {		
 		Optional<Movie> oldMov = engine.getMovieById(id);
-		model.addAttribute("movie", oldMov);
-		return "editmoviepage";
-		
+		if (oldMov != null) {
+			model.addAttribute("movie", oldMov.get());
+			return "editmoviepage";
+		} else {
+			redirAttrs.addFlashAttribute("status", "Movie ID does not exists");
+			return "redirect:/editmovie";
+		}		
 	}
 	
-	
+	@PostMapping("/editMovie/{id}")
+	public String saveEditedMovie(@PathVariable("id") int id, Movie editedMovie, RedirectAttributes redirAttrs) {
+	    Optional<Movie> oldMov = engine.getMovieById(id);
+	    if (oldMov != null) {
+	        Movie existingMovie = oldMov.get();
+	        existingMovie.setGenre_Title(editedMovie.getGenre_Title());
+	        existingMovie.setMovie_Id(editedMovie.getMovie_Id());
+	        engine.addMovie(existingMovie);
+	        redirAttrs.addFlashAttribute("status", "Movie ID: " + id + " saved successfully!");
+	        return "redirect:/editMovie/" + id;
+	    } else {
+	    	redirAttrs.addFlashAttribute("status", "Movie ID does not exists");
+			return "redirect:/editmovie";
+	    }
+	}
 	
 	@GetMapping("/movies/{id}")
 	public Optional<Movie> getMovieById(@PathVariable("id") int id) {
