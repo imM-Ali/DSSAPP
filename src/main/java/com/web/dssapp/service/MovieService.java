@@ -10,9 +10,11 @@ import com.web.dssapp.model.Movie;
 @Service
 public interface MovieService {
 
-	public Movie addMovie(Movie movie);
+	public Boolean addMovie(Movie movie);
 	public List<Movie> getAllMovies();
 	public Optional<Movie> getMovieById(int id);
 	public String deleteMovieById(int id);
+	public Boolean updateMovie(Movie movie);
+	
 	
 }

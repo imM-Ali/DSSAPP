@@ -13,11 +13,10 @@
 	<h1>Update Movie</h1>
 	<div class="alert alert-primary" role="alert" th:text="${status}"
 		th:if="${status}"></div>
-	<form th:action="@{/updateMovie}" th:object="${movie}" method="post">
+	<form th:action="@{/updateMovie}"  th:object="${movie}" th:method="put">
 		<label for="genreTitle">Genre and Title: (Please input Genre-space- Title)</label> 
-		<input type="text" id="genreTitle" name="genreTitle" th:field="*{genre_Title}" placeholder="${genre_Title}"/> <br /> 
-		<label for="movieId">Movie ID:</label> 
-		<input type="number" id="movieId" name="movieId" th:field="*{movie_Id}" /> <br />
+		<input type="text" id="genreTitle" name="genreTitle" th:field="*{genre_Title}"/> <br /> 
+		<input type="hidden" id="movieId" name="movie_Id" th:value="*{movie_Id}"/>		
 		<button type="submit">Save Movie</button>
 	</form>
 </body>

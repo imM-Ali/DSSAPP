@@ -17,9 +17,15 @@ public class MovieServiceImpl implements MovieService{
 	
 	
 	@Override
-	public Movie addMovie(Movie movie) {
-		_db.save(movie);
-		return movie;
+	public Boolean addMovie(Movie movie) {
+		Optional<Movie> found= _db.findById(movie.getMovie_Id());
+		if( found != null) {
+			return false;
+		}else {
+			_db.save(movie);			
+			return true;
+		}
+		
 	}
 
 	@Override
@@ -40,6 +46,18 @@ public class MovieServiceImpl implements MovieService{
 		}catch(Exception e) {
 			return e.getMessage();
 		}
+	}
+
+	@Override
+	public Boolean updateMovie(Movie movie) {
+		try {
+			_db.save(movie);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+		
+		
 	}
 
 }

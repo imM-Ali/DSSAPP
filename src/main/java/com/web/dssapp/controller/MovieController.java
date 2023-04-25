@@ -29,16 +29,16 @@ public class MovieController {
 	}
 
 	@PostMapping("/addMovie")
-	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {
-		Optional<Movie> found= engine.getMovieById(movie.getMovie_Id());
-		if( found != null) {			
-			redirAttrs.addFlashAttribute("status", "Movie ID already exists");
-			return "redirect:/addMovie";
-		}else {
-			engine.addMovie(movie);
-			redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
-			return "redirect:/addMovie";
-		}
+	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {		
+			Boolean status = engine.addMovie(movie);
+			if(status) {
+				redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
+				return "redirect:/addMovie";
+			}
+			else {
+				redirAttrs.addFlashAttribute("status", "An error occured");
+				return "redirect:/addMovie";
+			}
 		
 	}
 
@@ -69,6 +69,7 @@ public class MovieController {
 			return "redirect:/editmovie";
 	    }
 	}
+
 	
 	@GetMapping("/movies/{id}")
 	public Optional<Movie> getMovieById(@PathVariable("id") int id) {
