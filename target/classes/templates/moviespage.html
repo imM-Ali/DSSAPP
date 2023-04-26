@@ -15,6 +15,8 @@
 		<div class="row">
 			<h1 class="text-center">Welcome to IMDB junior</h1>
 		</div>
+		<div class="alert alert-primary" role="alert" th:text="${status}"
+		th:if="${status}"></div>
 		<a th:href="@{/addMovie}">
 			<button>Add Movie</button>
 		</a>
@@ -22,7 +24,6 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>     </th>
 					<th>Title</th>
 					<th>Rating</th>
 
@@ -31,7 +32,6 @@
 			<tbody>
 				<tr th:each="movie : ${movies}">
 					<td th:text="${movie._id}"></td>
-					<td>     </td>
 					<td th:text="${movie.title}"></td>
 					<td th:text="${movie.avgRating}"></td>
 					

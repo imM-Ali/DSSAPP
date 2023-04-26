@@ -1,24 +1,24 @@
 package com.web.dssapp.model;
 
 import java.util.Date;
-
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.annotation.Generated;
-import lombok.var;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Document(collection = "movieslatest")
 public class Movie {
 	@Id
 	private int _id;
 	private String txt;
+	@NotBlank(message = "Title cannot be empty")
 	private String title;
 	private String directedBy;
+	@NotBlank(message = "Cast cannot be empty")
 	private String starring;
 	private double avgRating;
-	private Date dateNow = new Date();
+	private String dateAdded = new Date().toString();
 
 	public Movie() {
 
@@ -32,7 +32,7 @@ public class Movie {
 		this.directedBy = directedBy;
 		this.starring = starring;
 		this.avgRating = avgRating;
-		
+
 	}
 
 	public int get_id() {

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.web.dssapp.model.Movie;
@@ -15,23 +16,27 @@ public class MovieServiceImpl implements MovieService{
 
 	@Autowired
 	MongoRepo _db;
-	
+	private int maxid=0;
 	
 	@Override
-	public Boolean addMovie(Movie movie) {
-		Optional<Movie> found= _db.findById(movie.get_id());
-		if( found != null) {
-			return false;
-		}else {
-			_db.save(movie);			
-			return true;
-		}
+	public Boolean addMovie(Movie movie) {	
 		
+		try {
+			movie.set_id(maxid+1);
+			_db.save(movie);
+			return true;
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+			return false;			
+		}		
 	}
 
 	@Override
 	public List<Movie> getAllMovies() {
-		return _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
+		List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));	
+		maxid = allMovies.get(allMovies.size()-1).get_id();
+		return allMovies;
 		
 	}
 
