@@ -13,11 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto
 {
-    private Long id;
+    private int id;
     @NotEmpty
-    private String firstName;
-    @NotEmpty
-    private String lastName;
+    private String name;
     @NotEmpty(message = "Email should not be empty")
     @Email
     private String email;
@@ -27,27 +25,19 @@ public class UserDto
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public String getFirstName() {
+	public String getName() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public String getLastName() {
+	public String getPassword() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public CharSequence getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public void setFirstName(String string) {
+	public void setName(String string) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void setLastName(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setEmail(String email2) {
+	public void setEmail(String email) {
 		// TODO Auto-generated method stub
 		
 	}

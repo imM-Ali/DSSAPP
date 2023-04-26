@@ -8,12 +8,16 @@ import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,20 +36,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void saveUser(UserDto userDto) {
-		User user = new User();
-		user.setName(userDto.getFirstName() + " " + userDto.getLastName());
-		user.setEmail(userDto.getEmail());
+	public void saveUser(UserDto user) {
+		User newUser = new User();
+		newUser.setName(user.getName());
+		newUser.setEmail(user.getEmail());
 
 		// encrypt the password once we integrate spring security
 		// user.setPassword(userDto.getPassword());
-		user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role role = roleRepository.findRoleByName("ROLE_ADMIN");
 		if (role == null) {
 			role = checkRoleExist();
 		}
-		user.setRoles(Arrays.asList(role));
-		userRepository.save(user);
+		newUser.setRoles(Arrays.asList(role));
+		userRepository.save(newUser);
 	}
 
 	@Override
@@ -54,16 +58,43 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserDto> findAllUsers() {
-		List<User> users = userRepository.findAll();
-		return users.stream().map((user) -> convertEntityToDto(user)).collect(Collectors.toList());
+	public Page<User> findAllUsersP(int pageNumber, int pageSize, Sort sort) {
+		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);
+		return userRepository.findAll(page);
+	}
+	
+	@Override
+	public Boolean updateUser(User user, UserDto userDto) {
+		try {
+			user.setEmail(userDto.getEmail());
+			user.setPassword(userDto.getPassword());
+			userRepository.save(user);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
+	
+	@Override
+	public Optional<User> findUserById (int id) {
+		return userRepository.findById(id);
+		
+	}
+	
+	@Override
+	public String deleteMovieById(int id) {
+		try {
+			userRepository.deleteById(id);
+			return "User deleted successfully";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
 	}
 
 	private UserDto convertEntityToDto(User user) {
 		UserDto userDto = new UserDto();
-		String[] name = user.getName().split(" ");
-		userDto.setFirstName(name[0]);
-		userDto.setLastName(name[1]);
+		userDto.setName(user.getName());
 		userDto.setEmail(user.getEmail());
 		return userDto;
 	}
@@ -72,6 +103,11 @@ public class UserServiceImpl implements UserService {
 		Role role = new Role();
 		role.setName("ROLE_ADMIN");
 		return roleRepository.save(role);
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		return userRepository.findAll();
 	}
 
 }
