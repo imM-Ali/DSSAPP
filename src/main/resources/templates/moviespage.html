@@ -31,8 +31,9 @@
 			</thead>
 			<tbody>
 				<tr th:each="movie : ${movies}">
-					<td th:text="${movie._id}"></td>
-					<td th:text="${movie.title}"></td>
+					<td th:text="${movie._id}"></td>					
+					<td><a th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}">					
+					</a></td>
 					<td th:text="${movie.avgRating}"></td>
 					<td><a th:href="@{|/editmovie/${movie._id}|}">
 							<button>Edit</button>

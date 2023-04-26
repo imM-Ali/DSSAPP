@@ -82,9 +82,15 @@ public class MovieController {
 	
 	@GetMapping("/deletemovie/{id}")
 	public String deleteMovie(@PathVariable("id") int id, RedirectAttributes redirAttrs) {
+		
 		String msg = movieService.deleteMovieById(id);
 		redirAttrs.addFlashAttribute("status", msg);
 		return "redirect:/movies/1";
 	}
 
+	@GetMapping("/movieDetail/{id}")
+	public String movieDetail(@PathVariable("id") int id, Model model) {
+		model.addAttribute("movie", movieService.getMovieById(id).get());
+		return "detailmoviepage";		
+	}
 }
