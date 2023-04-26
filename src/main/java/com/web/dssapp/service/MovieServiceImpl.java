@@ -12,32 +12,31 @@ import com.web.dssapp.model.Movie;
 import com.web.dssapp.repository.MongoRepo;
 
 @Service
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	MongoRepo _db;
-	private int maxid=0;
-	
+	private int maxid = 0;
+
 	@Override
-	public Boolean addMovie(Movie movie) {	
-		
+	public Boolean addMovie(Movie movie) {
+
 		try {
-			movie.set_id(maxid+1);
+			movie.set_id(maxid + 1);
 			_db.save(movie);
 			return true;
-		}catch(Exception e)
-		{
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return false;			
-		}		
+			return false;
+		}
 	}
 
 	@Override
 	public List<Movie> getAllMovies() {
-		List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));	
-		maxid = allMovies.get(allMovies.size()-1).get_id();
+		List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
+		maxid = allMovies.get(allMovies.size() - 1).get_id();
 		return allMovies;
-		
+
 	}
 
 	@Override
@@ -50,17 +49,25 @@ public class MovieServiceImpl implements MovieService{
 		try {
 			_db.deleteById(id);
 			return "Movie deleted successfully";
-		}catch(Exception e) {
+		} catch (Exception e) {
 			return e.getMessage();
 		}
 	}
 
-	/*
-	 * @Override public Boolean updateMovie(Movie movie) { try { _db.save(movie);
-	 * return true; }catch(Exception e) { return false; }
-	 * 
-	 * 
-	 * }
-	 */
+	@Override
+	public Boolean updateMovie(Movie movie, Movie movieDTO) {
+		try {
+			movie.setAvgRating(movieDTO.getAvgRating());
+			movie.setTitle(movieDTO.getTitle());
+			movie.setDirectedBy(movieDTO.getDirectedBy());
+			movie.setStarring(movieDTO.getStarring());
+			movie.setTxt(movieDTO.getTxt());
+			_db.save(movie);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+
+	}
 
 }

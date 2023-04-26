@@ -34,7 +34,9 @@
 					<td th:text="${movie._id}"></td>
 					<td th:text="${movie.title}"></td>
 					<td th:text="${movie.avgRating}"></td>
-					
+					<td><a th:href="@{|/editmovie/${movie._id}|}">
+							<button>Edit</button>
+					</a></td>
 				</tr>
 			</tbody>
 		</table>
