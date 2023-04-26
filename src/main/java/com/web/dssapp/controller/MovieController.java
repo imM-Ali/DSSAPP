@@ -2,6 +2,8 @@ package com.web.dssapp.controller;
 
 import com.web.dssapp.model.Movie;
 import com.web.dssapp.service.MovieService;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,20 +32,20 @@ public class MovieController {
 
 	@PostMapping("/addMovie")
 	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {
-		Optional<Movie> found= engine.getMovieById(movie.getMovie_Id());
+		Optional<Movie> found= engine.getMovieById(movie.getId());
 		if( found != null) {			
 			redirAttrs.addFlashAttribute("status", "Movie ID already exists");
 			return "redirect:/addMovie";
 		}else {
 			engine.addMovie(movie);
-			redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
+			redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getId()+"saved successfully!");
 			return "redirect:/addMovie";
 		}
 		
 	}
 
 	@GetMapping("/editmovie/{id}")
-	public String editMovie(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {		
+	public String editMovie(@PathVariable("id") ObjectId id, Model model, RedirectAttributes redirAttrs) {		
 		Optional<Movie> oldMov = engine.getMovieById(id);
 		if (oldMov != null) {
 			model.addAttribute("movie", oldMov.get());
@@ -55,12 +57,12 @@ public class MovieController {
 	}
 	
 	@PostMapping("/editMovie/{id}")
-	public String saveEditedMovie(@PathVariable("id") int id, Movie editedMovie, RedirectAttributes redirAttrs) {
+	public String saveEditedMovie(@PathVariable("id") ObjectId id, Movie editedMovie, RedirectAttributes redirAttrs) {
 	    Optional<Movie> oldMov = engine.getMovieById(id);
 	    if (oldMov != null) {
 	        Movie existingMovie = oldMov.get();
-	        existingMovie.setGenre_Title(editedMovie.getGenre_Title());
-	        existingMovie.setMovie_Id(editedMovie.getMovie_Id());
+	        existingMovie.setTitle(editedMovie.getTitle());
+	        existingMovie.setId(editedMovie.getId());
 	        engine.addMovie(existingMovie);
 	        redirAttrs.addFlashAttribute("status", "Movie ID: " + id + " saved successfully!");
 	        return "redirect:/editMovie/" + id;
@@ -71,13 +73,13 @@ public class MovieController {
 	}
 	
 	@GetMapping("/movies/{id}")
-	public Optional<Movie> getMovieById(@PathVariable("id") int id) {
+	public Optional<Movie> getMovieById(@PathVariable("id") ObjectId id) {
 		return engine.getMovieById(id);
 	}
 
 	@DeleteMapping("/movie/{id}")
-	public String deleteMovie(@PathVariable("id") int id) {
-		return engine.deleteMovieById(id);
+	public Optional<Movie> deleteMovie(@PathVariable("id") ObjectId id) {
+		return engine.getMovieById(id);
 	}
 
 }

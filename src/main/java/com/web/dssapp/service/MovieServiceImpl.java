@@ -3,6 +3,7 @@ package com.web.dssapp.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,12 +29,12 @@ public class MovieServiceImpl implements MovieService{
 	}
 
 	@Override
-	public Optional<Movie> getMovieById(int id) {
+	public Optional<Movie> getMovieById(ObjectId id) {
 		return _db.findById(id);
 	}
 
 	@Override
-	public String deleteMovieById(int id) {
+	public String deleteMovieById(ObjectId id) {
 		try {
 			_db.deleteById(id);
 			return "Movie deleted successfully";
