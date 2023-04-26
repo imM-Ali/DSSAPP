@@ -20,6 +20,12 @@ public class Movie {
 	private String starring;
 	private double avgRating;
 	private String dateAdded = new Date().toString();
+	private String imdbId;
+	public String getImdbId() {
+		return imdbId;
+	}
+
+	
 
 	public Movie() {
 
