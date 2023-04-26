@@ -22,9 +22,10 @@ public class MovieController {
 	@GetMapping("/movies")
 	public String home(Model model) {
 
-		model.addAttribute("movies", movieService.getMovieById(10).get());        //.getAllMovies());
+		model.addAttribute("movies", movieService.getAllMovies());
 		return "moviespage";
-	}
+	}	
+
 
 	@GetMapping("/addMovie")
 	public String saveMovie(Model model) {
@@ -65,19 +66,17 @@ public class MovieController {
 			redirAttrs.addFlashAttribute("status", "Movie ID: " + id + " saved successfully!");
 			return "redirect:/movies" ;
 		} else {
-			redirAttrs.addFlashAttribute("status", "Movie ID does not exists");
-			return "redirect:/editmovie";
+			redirAttrs.addFlashAttribute("status", "Movie ID does not exist");
+			return "redirect:/editmovie/{"+id+"}";
 		}
 	}
 
-	@GetMapping("/movies/{id}")
-	public Optional<Movie> getMovieById(@PathVariable("id") int id) {
-		return movieService.getMovieById(id);
-	}
-
-	@DeleteMapping("/movie/{id}")
-	public String deleteMovie(@PathVariable("id") int id) {
-		return movieService.deleteMovieById(id);
+	
+	@GetMapping("/deletemovie/{id}")
+	public String deleteMovie(@PathVariable("id") int id, RedirectAttributes redirAttrs) {
+		String msg = movieService.deleteMovieById(id);
+		redirAttrs.addFlashAttribute("status", msg);
+		return "redirect:/movies";
 	}
 
 }
