@@ -2,11 +2,8 @@ package com.web.dssapp.model;
 
 import lombok.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -26,15 +23,15 @@ public class User
    
 
     @Field(targetType = FieldType.OBJECT_ID)
-    private ObjectId id;
+    private int id;
     private String name;
     private String email;
     private String password;
     private List<Role> roles = new ArrayList<>();
-	public ObjectId getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(ObjectId id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
