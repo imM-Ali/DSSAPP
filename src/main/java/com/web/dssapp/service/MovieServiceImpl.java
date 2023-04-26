@@ -19,13 +19,14 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	MongoRepo _db;
-	//private int maxid = _db.findAll(Sort.by(Sort.Direction.ASC, "_id")).get((int)_db.count() - 1).get_id();
+	private int maxid;
 
 	@Override
 	public Boolean addMovie(Movie movie) {
 
 		try {
-			//movie.set_id(maxid + 1);
+			maxId();
+			movie.set_id(maxid + 1);
 			_db.save(movie);
 			return true;
 		} catch (Exception e) {
@@ -38,7 +39,8 @@ public class MovieServiceImpl implements MovieService {
 	public Page<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
 		
 		
-		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);	
+		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);		
+		
 		return _db.findAll(page);
 
 	}
@@ -72,6 +74,11 @@ public class MovieServiceImpl implements MovieService {
 			return false;
 		}
 
+	}
+
+	@Override
+	public void maxId() {		
+		maxid = _db.max();
 	}
 
 }

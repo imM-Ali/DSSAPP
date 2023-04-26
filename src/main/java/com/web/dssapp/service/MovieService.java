@@ -18,6 +18,6 @@ public interface MovieService {
 	public Optional<Movie> getMovieById(int id);
 	public String deleteMovieById(int id);
 	public Boolean updateMovie(Movie movie, Movie movieDTO);
-	
+	public void maxId();
 	
 }

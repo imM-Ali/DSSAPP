@@ -36,13 +36,13 @@ public class MovieController {
 
 
 	@GetMapping("/addMovie")
-	public String saveMovie(Model model) {
+	public String addMovie(Model model) {
 		model.addAttribute("movie", new Movie());
 		return "addmoviepage";
 	}
 
 	@PostMapping("/addMovie")
-	public String saveMovie(@Valid Movie movie, BindingResult bindingResult, RedirectAttributes atr) {
+	public String addmovie(@Valid Movie movie, BindingResult bindingResult, RedirectAttributes atr) {
 		if (bindingResult.hasErrors()) {
 			return "addmoviepage";
 		}
