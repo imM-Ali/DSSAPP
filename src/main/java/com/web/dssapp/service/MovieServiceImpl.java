@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
@@ -32,8 +35,14 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public List<Movie> getAllMovies() {
-		List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
+	public List<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
+		
+		Pageable p =  PageRequest.of(pageNumber, pageSize, sort);
+		
+		Page<Movie> pagedMovies = _db.findAll(p);
+		List<Movie> allMovies = pagedMovies.getContent();
+		
+		//List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
 		maxid = allMovies.get(allMovies.size() - 1).get_id();
 		return allMovies;
 

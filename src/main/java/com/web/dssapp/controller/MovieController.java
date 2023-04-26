@@ -6,6 +6,7 @@ import com.web.dssapp.service.MovieService;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +21,9 @@ public class MovieController {
 	private MovieService movieService;
 
 	@GetMapping("/movies")
-	public String home(Model model) {
+	public String home(@RequestParam(value ="pageNumber", defaultValue="0", required=false) int pageNumber  ,@RequestParam(value ="pageSize", defaultValue="50", required=false) int pageSize  ,Model model) {
 
-		model.addAttribute("movies", movieService.getAllMovies());
+		model.addAttribute("movies", movieService.getAllMovies(pageNumber,pageSize,Sort.by(Sort.Direction.ASC, "_id")));
 		return "moviespage";
 	}	
 
