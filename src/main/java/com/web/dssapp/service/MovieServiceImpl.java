@@ -37,7 +37,7 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public List<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
 		
-		Pageable p =  PageRequest.of(pageNumber, pageSize, sort);
+		Pageable p =  PageRequest.of(pageNumber-1, pageSize, sort);
 		
 		Page<Movie> pagedMovies = _db.findAll(p);
 		List<Movie> allMovies = pagedMovies.getContent();

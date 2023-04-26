@@ -21,7 +21,7 @@ public class MovieController {
 	private MovieService movieService;
 
 	@GetMapping("/movies")
-	public String home(@RequestParam(value ="pageNumber", defaultValue="0", required=false) int pageNumber  ,@RequestParam(value ="pageSize", defaultValue="50", required=false) int pageSize  ,Model model) {
+	public String home(@RequestParam(value ="pageNumber", defaultValue="1", required=false) int pageNumber  ,@RequestParam(value ="pageSize", defaultValue="50", required=false) int pageSize  ,Model model) {
 
 		model.addAttribute("movies", movieService.getAllMovies(pageNumber,pageSize,Sort.by(Sort.Direction.ASC, "_id")));
 		return "moviespage";
