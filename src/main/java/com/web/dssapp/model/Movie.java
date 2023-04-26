@@ -3,12 +3,14 @@ package com.web.dssapp.model;
 import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.annotation.Generated;
 import jakarta.validation.constraints.NotBlank;
 
 
 @Document(collection = "movieslatest")
 public class Movie {
-	@Id
+	@Id	
 	private int _id;
 	private String txt;
 	@NotBlank(message = "Title cannot be empty")

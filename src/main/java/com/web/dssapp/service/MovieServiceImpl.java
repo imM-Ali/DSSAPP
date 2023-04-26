@@ -1,5 +1,6 @@
 package com.web.dssapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.web.dssapp.model.Movie;
@@ -19,13 +19,13 @@ public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	MongoRepo _db;
-	private int maxid = 0;
+	//private int maxid = _db.findAll(Sort.by(Sort.Direction.ASC, "_id")).get((int)_db.count() - 1).get_id();
 
 	@Override
 	public Boolean addMovie(Movie movie) {
 
 		try {
-			movie.set_id(maxid + 1);
+			//movie.set_id(maxid + 1);
 			_db.save(movie);
 			return true;
 		} catch (Exception e) {
@@ -35,16 +35,11 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public List<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
+	public Page<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
 		
-		Pageable p =  PageRequest.of(pageNumber-1, pageSize, sort);
 		
-		Page<Movie> pagedMovies = _db.findAll(p);
-		List<Movie> allMovies = pagedMovies.getContent();
-		
-		//List<Movie> allMovies = _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
-		maxid = allMovies.get(allMovies.size() - 1).get_id();
-		return allMovies;
+		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);	
+		return _db.findAll(page);
 
 	}
 

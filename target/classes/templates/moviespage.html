@@ -16,7 +16,7 @@
 			<h1 class="text-center">Welcome to IMDB junior</h1>
 		</div>
 		<div class="alert alert-primary" role="alert" th:text="${status}"
-		th:if="${status}"></div>
+			th:if="${status}"></div>
 		<a th:href="@{/addMovie}">
 			<button>Add Movie</button>
 		</a>
@@ -43,6 +43,31 @@
 				</tr>
 			</tbody>
 		</table>
+		<div th:if="${totalPages>1}">
+			<div class="row col-sm-12">
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}"
+						th:href="@{'/movies/' + ${1}}">First</a>
+
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage <= totalPages && currentPage>1}"
+						th:href="@{'/movies/' + ${currentPage - 1}}">Previous</a>
+				</div>
+				<th:block th:if="${totalPages>100}">.....   </th:block>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}"
+						th:href="@{'/movies/' + ${currentPage + 1}}">Next</a> <span
+						th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				<div class="col-sm-1">
+					<a th:if="${currentPage < totalPages}"
+						th:href="@{'/movies/' + ${totalPages}}">Last</a>
+
+				</div>
+			</div>
+		</div>
+
 
 	</div>
 </body>
