@@ -19,7 +19,7 @@ public class MovieServiceImpl implements MovieService{
 	
 	@Override
 	public Boolean addMovie(Movie movie) {
-		Optional<Movie> found= _db.findById(movie.getItem_id());
+		Optional<Movie> found= _db.findById(movie.get_id());
 		if( found != null) {
 			return false;
 		}else {
@@ -31,7 +31,7 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public List<Movie> getAllMovies() {
-		return _db.findAll(Sort.by(Sort.Direction.ASC, "item_id"));
+		return _db.findAll(Sort.by(Sort.Direction.ASC, "_id"));
 		
 	}
 

@@ -1,5 +1,7 @@
 package com.web.dssapp.model;
 
+import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -9,45 +11,36 @@ import lombok.var;
 
 @Document(collection = "movieslatest")
 public class Movie {
-	@Id 
-	private ObjectId _id;
-	private int item_id;
+	@Id
+	private int _id;
 	private String txt;
 	private String title;
 	private String directedBy;
 	private String starring;
 	private double avgRating;
+	private Date dateNow = new Date();
 
 	public Movie() {
 
 	}
 
-	public Movie(ObjectId _id, int item_id, String txt, String title, String directedBy, String starring,
-			double avgRating) {
+	public Movie(int _id, String txt, String title, String directedBy, String starring, double avgRating) {
 		super();
 		this._id = _id;
-		this.item_id = item_id;
 		this.txt = txt;
 		this.title = title;
 		this.directedBy = directedBy;
 		this.starring = starring;
 		this.avgRating = avgRating;
+		
 	}
 
-	public ObjectId get_id() {
+	public int get_id() {
 		return _id;
 	}
 
-	public void set_id(ObjectId _id) {
+	public void set_id(int _id) {
 		this._id = _id;
-	}
-
-	public int getItem_id() {
-		return item_id;
-	}
-
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
 	}
 
 	public String getTxt() {
@@ -89,6 +82,5 @@ public class Movie {
 	public void setAvgRating(double avgRating) {
 		this.avgRating = avgRating;
 	}
-
 
 }

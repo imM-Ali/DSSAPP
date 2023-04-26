@@ -32,7 +32,7 @@ public class MovieController {
 	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {		
 			Boolean status = engine.addMovie(movie);
 			if(status) {
-				redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getItem_id()+"saved successfully!");
+				redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.get_id()+"saved successfully!");
 				return "redirect:/addMovie";
 			}
 			else {

@@ -22,14 +22,14 @@
 			<thead>
 				<tr>
 					<th>Id</th>
-					<th>Genre</th>
 					<th>Title</th>
+					<th>Rating</th>
 
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="movie : ${movies}">
-					<td th:text="${movie.item_id}"></td>
+					<td th:text="${movie._id}"></td>
 					<td th:text="${movie.title}"></td>
 					<td th:text="${movie.avgRating}"></td>
 					
