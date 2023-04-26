@@ -3,66 +3,92 @@ package com.web.dssapp.model;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.annotation.Generated;
 import lombok.var;
 
-@Document(collection = "moviesData")
+@Document(collection = "movieslatest")
 public class Movie {
-    @Id
-    private ObjectId id;
-    private String Genre_Title;    
-    private int movie_Id;
+	@Id 
+	private ObjectId _id;
+	private int item_id;
+	private String txt;
+	private String title;
+	private String directedBy;
+	private String starring;
+	private double avgRating;
 
-    // default constructor
-    public Movie() {}
+	public Movie() {
 
-    // constructor with arguments
-    public Movie(ObjectId id, String Genre_Title, int movie_Id) {
-        this.id = id;
-        this.Genre_Title = Genre_Title;
-        this.movie_Id = movie_Id;       
-    }
-    
-    @Override
-    public String toString() {
-    	
-		return "1)"+this.id+"2)"+this.Genre_Title+"3)"+this.movie_Id;
-    	
-    }
-
-	public String getGenre_Title() {
-		return Genre_Title;
 	}
 
-	public void setGenre_Title(String genre_Title) {
-		Genre_Title = genre_Title;
+	public Movie(ObjectId _id, int item_id, String txt, String title, String directedBy, String starring,
+			double avgRating) {
+		super();
+		this._id = _id;
+		this.item_id = item_id;
+		this.txt = txt;
+		this.title = title;
+		this.directedBy = directedBy;
+		this.starring = starring;
+		this.avgRating = avgRating;
 	}
 
-	public ObjectId getId() {
-		return id;
+	public ObjectId get_id() {
+		return _id;
 	}
 
-	public void setId(ObjectId id) {
-		this.id = id;
+	public void set_id(ObjectId _id) {
+		this._id = _id;
 	}
 
-	public int getMovie_Id() {
-		return movie_Id;
+	public int getItem_id() {
+		return item_id;
 	}
 
-	public void setMovie_Id(int movie_Id) {
-		this.movie_Id = movie_Id;
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
 	}
 
-	public String getGenre() {
-		return Genre_Title.split("\\t")[0];
+	public String getTxt() {
+		return txt;
 	}
 
+	public void setTxt(String txt) {
+		this.txt = txt;
+	}
 
 	public String getTitle() {
-		return Genre_Title.split("\\t")[1];
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDirectedBy() {
+		return directedBy;
+	}
+
+	public void setDirectedBy(String directedBy) {
+		this.directedBy = directedBy;
+	}
+
+	public String getStarring() {
+		return starring;
+	}
+
+	public void setStarring(String starring) {
+		this.starring = starring;
+	}
+
+	public double getAvgRating() {
+		return avgRating;
+	}
+
+	public void setAvgRating(double avgRating) {
+		this.avgRating = avgRating;
 	}
 
 
- 
-    
 }

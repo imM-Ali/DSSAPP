@@ -32,7 +32,7 @@ public class MovieController {
 	public String saveMovie(Movie movie, RedirectAttributes redirAttrs) {		
 			Boolean status = engine.addMovie(movie);
 			if(status) {
-				redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getMovie_Id()+"saved successfully!");
+				redirAttrs.addFlashAttribute("status", "Movie ID: "+movie.getItem_id()+"saved successfully!");
 				return "redirect:/addMovie";
 			}
 			else {
@@ -59,8 +59,7 @@ public class MovieController {
 	    Optional<Movie> oldMov = engine.getMovieById(id);
 	    if (oldMov != null) {
 	        Movie existingMovie = oldMov.get();
-	        existingMovie.setGenre_Title(editedMovie.getGenre_Title());
-	        existingMovie.setMovie_Id(editedMovie.getMovie_Id());
+	        existingMovie.setTitle(editedMovie.getTitle()); 	        
 	        engine.addMovie(existingMovie);
 	        redirAttrs.addFlashAttribute("status", "Movie ID: " + id + " saved successfully!");
 	        return "redirect:/editMovie/" + id;

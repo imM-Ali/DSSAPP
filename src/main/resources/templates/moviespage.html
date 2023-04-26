@@ -29,15 +29,10 @@
 			</thead>
 			<tbody>
 				<tr th:each="movie : ${movies}">
-					<td th:text="${movie.movie_Id}"></td>
-					<td th:text="${movie.Genre}"></td>
-					<td th:text="${movie.Title}"></td>
-					<td><a th:href="@{|/editmovie/${movie.movie_Id}|}">
-							<button>Edit</button>
-					</a></td>
-					<td><a th:href="@{/addMovie}">
-							<button>Delete</button>
-					</a></td>
+					<td th:text="${movie.item_id}"></td>
+					<td th:text="${movie.title}"></td>
+					<td th:text="${movie.avgRating}"></td>
+					
 				</tr>
 			</tbody>
 		</table>

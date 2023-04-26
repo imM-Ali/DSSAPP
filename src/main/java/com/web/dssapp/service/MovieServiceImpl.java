@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.web.dssapp.model.Movie;
@@ -18,7 +19,7 @@ public class MovieServiceImpl implements MovieService{
 	
 	@Override
 	public Boolean addMovie(Movie movie) {
-		Optional<Movie> found= _db.findById(movie.getMovie_Id());
+		Optional<Movie> found= _db.findById(movie.getItem_id());
 		if( found != null) {
 			return false;
 		}else {
@@ -30,7 +31,8 @@ public class MovieServiceImpl implements MovieService{
 
 	@Override
 	public List<Movie> getAllMovies() {
-		return _db.findAll();
+		return _db.findAll(Sort.by(Sort.Direction.ASC, "item_id"));
+		
 	}
 
 	@Override
@@ -48,16 +50,12 @@ public class MovieServiceImpl implements MovieService{
 		}
 	}
 
-	@Override
-	public Boolean updateMovie(Movie movie) {
-		try {
-			_db.save(movie);
-			return true;
-		}catch(Exception e) {
-			return false;
-		}
-		
-		
-	}
+	/*
+	 * @Override public Boolean updateMovie(Movie movie) { try { _db.save(movie);
+	 * return true; }catch(Exception e) { return false; }
+	 * 
+	 * 
+	 * }
+	 */
 
 }
