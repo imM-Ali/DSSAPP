@@ -34,18 +34,19 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/users/{pageNumber}")
-	public String home(@PathVariable(value = "pageNumber", required = false) int pageNumber, Model model) {
-		// Page<User> pagedMovies =
-		// userService.findAllUsersP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
-		/*
-		 * List<User> allUsers = pagedMovies.getContent(); model.addAttribute("users",
-		 * allUsers); model.addAttribute("currentPage", pageNumber);
-		 * model.addAttribute("totalPages", pagedMovies.getTotalPages());
-		 * model.addAttribute("totalItems", pagedMovies.getTotalElements());
-		 */
-		return "userspage";
-	}
+	/*
+	 * @GetMapping("/users/{pageNumber}") public String home(@PathVariable(value =
+	 * "pageNumber", required = false) int pageNumber, Model model) { // Page<User>
+	 * pagedMovies = //
+	 * userService.findAllUsersP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
+	 * 
+	 * List<User> allUsers = pagedMovies.getContent(); model.addAttribute("users",
+	 * allUsers); model.addAttribute("currentPage", pageNumber);
+	 * model.addAttribute("totalPages", pagedMovies.getTotalPages());
+	 * model.addAttribute("totalItems", pagedMovies.getTotalElements());
+	 * 
+	 * return "userspage"; }
+	 */
 
 	@GetMapping("/addUser")
 	public String addUser(Model model) {
@@ -94,7 +95,7 @@ public class UserController {
 		// does not want to change pass
 		boolean validationCondition1 = res.getAllErrors().size() == 1 && res.getFieldValue("password").equals("");
 		// if there are no errors, continue saving if
-		boolean validationCondition2 = !res.hasErrors();		
+		boolean validationCondition2 = !res.hasErrors();
 		if (validationCondition1 || validationCondition2) {
 			if (validationCondition1) {
 				userDTO.setPassword(existingUser.getPassword());
@@ -118,6 +119,5 @@ public class UserController {
 		// redirAttrs.addFlashAttribute("status", msg);
 		return "redirect:/movies/1";
 	}
-	
 
 }

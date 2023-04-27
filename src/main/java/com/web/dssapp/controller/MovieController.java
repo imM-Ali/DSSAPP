@@ -74,7 +74,11 @@ public class MovieController {
 	}
 
 	@PostMapping("/updateMovie/{id}")
-	public String saveEditedMovie(@PathVariable("id") int id, Movie movieDTO, RedirectAttributes redirAttrs) {
+	public String saveEditedMovie(@PathVariable("id") int id, @Valid Movie movieDTO, BindingResult res, RedirectAttributes redirAttrs, Model model) {	
+		if(res.hasErrors()) {
+			model.addAttribute("movie", movieDTO);
+			return "editmoviepage";
+		}
 		Optional<Movie> oldMov = movieService.getMovieById(id);
 		if (oldMov != null) {
 			Movie existingMovie = oldMov.get();
