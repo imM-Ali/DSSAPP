@@ -29,10 +29,10 @@ public class UserDto
     private String email;   
     @NotBlank(message = "Password should not be empty")
     private String password;
-	public int get_Id() {
+	public int get_id() {
 		return _id;
 	}
-	public void set_Id(int id) {
+	public void set_id(int id) {
 		this._id = id;
 	}
 	public String getFirstName() {

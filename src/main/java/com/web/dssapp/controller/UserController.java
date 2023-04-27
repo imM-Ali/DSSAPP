@@ -52,11 +52,19 @@ public class UserController {
 		}
 
 		userService.saveUser(user);
-		atr.addFlashAttribute("status", "User saved successfully with user Id: " + user.get_Id());
+		atr.addFlashAttribute("status", "User saved successfully with user Id: " + user.get_id());
 		return "redirect:/user/1";
 
 	}
 
+	@GetMapping("/viewuserdetails/{id}")
+	public String viewUserDetails(@PathVariable("id") int id, Model model) {
+		model.addAttribute("user", userService.findUserById(id).get());
+		return "userdetailpage";
+		
+	}
+	
+	
 	@GetMapping("/edituser/{id}")
 	public String editUser(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {
 		Optional<User> oldUser = userService.findUserById(id);

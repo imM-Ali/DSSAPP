@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		newUser.setLastName(user.getLastName());
 		newUser.setEmail(user.getEmail());
 		newUser.setUsername(user.getUsername());
-		newUser.setId(maxid()+1);
+		newUser.set_id(maxid()+1);
 		// encrypt the password once we integrate spring security		
 		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 		/*
