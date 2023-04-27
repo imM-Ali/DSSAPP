@@ -100,7 +100,7 @@ public class UserController {
 				userDTO.setPassword(existingUser.getPassword());
 			}
 			userService.updateUser(existingUser, userDTO);
-			attr.addFlashAttribute("status", "Saved successfully");
+			attr.addFlashAttribute("status", "Saved successfully, will reflect on your next login");
 			return "redirect:/viewuserdetails/" + id;
 		}
 		// if there are errors and the previous 2 conditions were not met, then return
@@ -118,5 +118,6 @@ public class UserController {
 		// redirAttrs.addFlashAttribute("status", msg);
 		return "redirect:/movies/1";
 	}
+	
 
 }
