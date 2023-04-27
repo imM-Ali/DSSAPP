@@ -31,6 +31,10 @@ public class CustomUserDetails implements UserDetails {
 		}
         return list;
 	}
+	
+	public User getContext() {
+	return this.user;
+	}
 
 	@Override
 	public String getPassword() {

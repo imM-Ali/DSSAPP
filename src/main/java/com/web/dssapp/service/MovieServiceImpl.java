@@ -36,10 +36,10 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public Page<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {
+	public Page<Movie> getAllMovies(int pageNumber, int pageSize, Sort sort) {		
 		
+		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);
 		
-		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);		
 		
 		return _db.findAll(page);
 

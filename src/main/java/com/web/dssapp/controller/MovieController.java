@@ -1,6 +1,8 @@
 package com.web.dssapp.controller;
 
+import com.web.dssapp.config.CustomUserDetails;
 import com.web.dssapp.model.Movie;
+import com.web.dssapp.model.User;
 import com.web.dssapp.service.MovieService;
 
 import jakarta.validation.Valid;
@@ -8,25 +10,33 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.Console;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.ConsoleHandler;
 
 @Controller
 public class MovieController {
-
+	
 	@Autowired
 	private MovieService movieService;
 
 	@GetMapping("/movies/{pageNumber}")
-	public String home(@PathVariable(value ="pageNumber", required=false) int pageNumber,Model model) {
+	public String home(@PathVariable(value ="pageNumber", required=false) int pageNumber,Model model) {	
+		final User CURRENT_USER = ((CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getContext();
 		Page<Movie> pagedMovies = movieService.getAllMovies(pageNumber,50,Sort.by(Sort.Direction.ASC, "_id"));
 		List<Movie> allMovies = pagedMovies.getContent();
+		model.addAttribute("currentuser", CURRENT_USER);
 		model.addAttribute("movies", allMovies);
 		model.addAttribute("currentPage", pageNumber);
 		model.addAttribute("totalPages", pagedMovies.getTotalPages());
