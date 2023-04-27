@@ -2,6 +2,9 @@ package com.web.dssapp.dto;
 
 import org.springframework.data.annotation.Id;
 
+import com.web.dssapp.model.User;
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -65,7 +68,8 @@ public class UserDto
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
+	
+
 
    
 }

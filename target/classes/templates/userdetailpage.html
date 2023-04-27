@@ -9,7 +9,8 @@
 	crossorigin="anonymous">
 </head>
 <body th:object="${user}">
-	<h1></h1>
+	<div class="alert alert-primary" role="alert" th:text="${status}"
+		th:if="${status}"></div>
 	
 		<div>
 			<label>First Name:</label> <span th:text="*{firstName}"></span><br />
@@ -28,9 +29,6 @@
 		<a th:href="@{|/edituser/${user._id}|}"><button>Edit User</button></a>
 	
 
-	<p class="text-center">
-		Already a member?<a th:href="@{/login}">Log in</a>
-	</p>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

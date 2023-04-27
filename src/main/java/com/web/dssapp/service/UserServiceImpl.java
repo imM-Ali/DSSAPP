@@ -61,8 +61,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Boolean updateUser(User user, UserDto userDto) {
 		try {
+			user.set_id(userDto.get_id());
+			user.setFirstName(userDto.getFirstName());
+			user.setLastName(userDto.getLastName());
+			user.setUsername(userDto.getUsername());
 			user.setEmail(userDto.getEmail());
-			user.setPassword(userDto.getPassword());
+			user.setPassword(passwordEncoder.encode(userDto.getPassword()));
 			userRepository.save(user);
 			return true;
 		} catch (Exception e) {

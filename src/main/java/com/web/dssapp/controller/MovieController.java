@@ -30,7 +30,7 @@ public class MovieController {
 	
 	@Autowired
 	private MovieService movieService;
-
+	
 	@GetMapping("/movies/{pageNumber}")
 	public String home(@PathVariable(value ="pageNumber", required=false) int pageNumber,Model model) {	
 		final User CURRENT_USER = ((CustomUserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getContext();

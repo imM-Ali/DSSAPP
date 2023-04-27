@@ -9,6 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
+import com.web.dssapp.dto.UserDto;
+
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -81,7 +84,18 @@ public class User
 		this.roles = roles;
 	}
   
-	
+	public void updateAll(@Valid User user) {
+		
+		this._id = user.get_id();
+		this.email = user.getEmail();
+		this.firstName = user.getFirstName();
+		this.lastName = user.getLastName();
+		this.password = user.getPassword();
+		this.username = user.getUsername();	
+		
+		
+		
+	}
 
 
 

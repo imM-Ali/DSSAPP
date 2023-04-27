@@ -9,7 +9,8 @@
 	crossorigin="anonymous">
 </head>
 <body th:object="${user}">
-	<h1></h1>
+	<div class="alert alert-primary" role="alert" th:text="${status}"
+		th:if="${status}"></div>
 	
 		<div>
 			<label>First Name:</label> <span th:text="*{firstName}"></span><br />
