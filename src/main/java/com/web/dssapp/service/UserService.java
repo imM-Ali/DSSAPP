@@ -13,10 +13,13 @@ import org.springframework.data.domain.Sort;
 
 public interface UserService {
     void saveUser(@Valid UserDto user);
+    User findByusername(String username);
     User findByEmail(String email);
-    Page<User> findAllUsersP(int pageNumber, int pageSize, Sort sort);
-    List<User> findAllUsers();
+    //Page<User> findAllUsersP(int pageNumber, int pageSize, Sort sort);
+    //List<User> findAllUsers();
     Boolean updateUser(User user, UserDto userDto);
     Optional<User> findUserById (int id);
-    String deleteMovieById(int id);
+    String deleteUserById(int id);
+    public int maxid();
+    
 }

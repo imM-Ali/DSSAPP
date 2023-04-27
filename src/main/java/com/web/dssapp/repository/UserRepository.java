@@ -1,6 +1,7 @@
 package com.web.dssapp.repository;
 
 
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -8,9 +9,12 @@ import com.web.dssapp.model.User;
 
 public interface UserRepository extends MongoRepository<User, Integer> {
 	
-	@Query("{name:'?0'}")
-    User findUserByName(String name);
+	@Query("{username:'?0'}")
+    User findUserByusername(String username);
 	
-	@Query("{name:'?0'}")
+	@Query("{email:'?0'}")
     User findUserByEmail(String email);
+	
+	@Aggregation(pipeline = { "{$group: { _id: '', total: {$max: $_id }}}" })
+	public int maxid();
 }

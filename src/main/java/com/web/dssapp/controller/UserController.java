@@ -28,12 +28,13 @@ public class UserController {
 
 	@GetMapping("/users/{pageNumber}")
 	public String home(@PathVariable(value ="pageNumber", required=false) int pageNumber,Model model) {
-		Page<User> pagedMovies = userService.findAllUsersP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
-		List<User> allUsers = pagedMovies.getContent();
-		model.addAttribute("users", allUsers);
-		model.addAttribute("currentPage", pageNumber);
-		model.addAttribute("totalPages", pagedMovies.getTotalPages());
-		model.addAttribute("totalItems", pagedMovies.getTotalElements());
+		//Page<User> pagedMovies = userService.findAllUsersP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
+		/*
+		 * List<User> allUsers = pagedMovies.getContent(); model.addAttribute("users",
+		 * allUsers); model.addAttribute("currentPage", pageNumber);
+		 * model.addAttribute("totalPages", pagedMovies.getTotalPages());
+		 * model.addAttribute("totalItems", pagedMovies.getTotalElements());
+		 */
 		return "userspage";
 	}	
 
@@ -51,7 +52,7 @@ public class UserController {
 		}
 
 		userService.saveUser(user);
-		atr.addFlashAttribute("status", "User saved successfully with user Id: " + user.getId());
+		atr.addFlashAttribute("status", "User saved successfully with user Id: " + user.get_Id());
 		return "redirect:/user/1";
 
 	}
@@ -86,8 +87,8 @@ public class UserController {
 	@GetMapping("/deleteuser/{id}")
 	public String deleteUser(@PathVariable("id") int id, RedirectAttributes redirAttrs) {
 		
-		String msg = userService.deleteMovieById(id);
-		redirAttrs.addFlashAttribute("status", msg);
+		//String msg = userService.deleteMovieById(id);
+		//redirAttrs.addFlashAttribute("status", msg);
 		return "redirect:/movies/1";
 	}
 

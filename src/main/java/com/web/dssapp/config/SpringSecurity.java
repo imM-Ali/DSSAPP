@@ -37,10 +37,10 @@ public class SpringSecurity {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((authz) -> {
 			try {
-				authz.anyRequest().authenticated().and().formLogin(login -> login.defaultSuccessUrl("/movies/1", true))
+				authz.anyRequest().authenticated().and().formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/movies/1", true).permitAll())
 
 						.httpBasic(withDefaults());
 			} catch (Exception e) {
@@ -51,7 +51,7 @@ public class SpringSecurity {
 	}
 
 	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {		
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 }

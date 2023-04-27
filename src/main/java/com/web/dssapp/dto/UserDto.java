@@ -13,32 +13,49 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto
 {
-    private int id;
-    @NotEmpty
-    private String name;
-    @NotEmpty(message = "Email should not be empty")
-    @Email
+	private int _id;
+    private String firstName;
+    private String lastName;
+    private String username;
     private String email;
-    @NotEmpty(message = "Password should not be empty")
     private String password;
+	public int get_Id() {
+		return _id;
+	}
+	public void set_Id(int id) {
+		this._id = id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public String getPassword() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public void setName(String string) {
-		// TODO Auto-generated method stub
-		
+		return email;
 	}
 	public void setEmail(String email) {
-		// TODO Auto-generated method stub
-		
+		this.email = email;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+    
+
+   
 }

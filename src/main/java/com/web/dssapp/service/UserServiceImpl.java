@@ -23,26 +23,21 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private PasswordEncoder passwordEncoder;
-
-	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
-			PasswordEncoder passwordEncoder) {
-		this.userRepository = userRepository;
-		this.roleRepository = roleRepository;
-		this.passwordEncoder = passwordEncoder;
-	}
+	
+	
 
 	@Override
 	public void saveUser(UserDto user) {
 		User newUser = new User();
-		newUser.setName(user.getName());
+		newUser.setFirstName(user.getFirstName());
+		newUser.setLastName(user.getLastName());
 		newUser.setEmail(user.getEmail());
-
-		// encrypt the password once we integrate spring security
-		// user.setPassword(userDto.getPassword());
+		newUser.setUsername(user.getUsername());
+		newUser.setId(maxid()+1);
+		// encrypt the password once we integrate spring security		
 		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 		Role role = roleRepository.findRoleByName("ROLE_ADMIN");
 		if (role == null) {
@@ -57,11 +52,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByEmail(email);
 	}
 
-	@Override
-	public Page<User> findAllUsersP(int pageNumber, int pageSize, Sort sort) {
-		Pageable page =  PageRequest.of(pageNumber-1, pageSize, sort);
-		return userRepository.findAll(page);
-	}
 	
 	@Override
 	public Boolean updateUser(User user, UserDto userDto) {
@@ -83,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public String deleteMovieById(int id) {
+	public String deleteUserById(int id) {
 		try {
 			userRepository.deleteById(id);
 			return "User deleted successfully";
@@ -92,12 +82,8 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-	private UserDto convertEntityToDto(User user) {
-		UserDto userDto = new UserDto();
-		userDto.setName(user.getName());
-		userDto.setEmail(user.getEmail());
-		return userDto;
-	}
+
+	
 
 	private Role checkRoleExist() {
 		Role role = new Role();
@@ -105,9 +91,15 @@ public class UserServiceImpl implements UserService {
 		return roleRepository.save(role);
 	}
 
+	
 	@Override
-	public List<User> findAllUsers() {
-		return userRepository.findAll();
+	public int maxid() {
+		return userRepository.maxid();
+	}
+
+	@Override
+	public User findByusername(String username) {
+		return userRepository.findUserByusername(username);
 	}
 
 }

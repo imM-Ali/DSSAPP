@@ -19,11 +19,11 @@ public class AuthController {
 	private UserService userService;
 	
 	@GetMapping("/login") 
-	public String loginForm() {  
-	
+	public String loginForm(Model model) {
+		model.addAttribute("user", new UserDto());
 		return "login"; 
-	
 	}
+	
   
 	// handler method to handle user registration request
   

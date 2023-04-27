@@ -14,6 +14,7 @@ import com.web.dssapp.model.User;
 
 public class CustomUserDetails implements UserDetails {
 	
+	
 	private User user;
 
 	
@@ -40,7 +41,7 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public String getUsername() {
 		// TODO Auto-generated method stub
-		return user.getName();
+		return user.getUsername();
 	}
 
 	@Override
