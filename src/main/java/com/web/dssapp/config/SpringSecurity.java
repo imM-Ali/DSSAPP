@@ -40,7 +40,7 @@ public class SpringSecurity {
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests((authz) -> {
 			try {
-				authz.anyRequest().authenticated().and().formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/movies/1", true).permitAll())
+				authz.requestMatchers("/signup","/login").permitAll().anyRequest().authenticated().and().formLogin(login -> login.loginPage("/login").defaultSuccessUrl("/movies/1", true))
 
 						.httpBasic(withDefaults());
 			} catch (Exception e) {

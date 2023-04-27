@@ -10,26 +10,34 @@
 </head>
 <body>
 	<h1>Add User</h1>
-	<form th:action="@{/addUser}" th:object="${user}" method="post">
+	<form th:action="@{/signup}" th:object="${user}" method="post">
 		<div>
-			<label>Title:</label> <input type="text" id="name" name="name"
-				th:field="*{name}" /> <br />
+			<label>First Name:</label> <input type="text" id="name" name="firstname"
+				th:field="*{firstName}" /> <br />
 		</div>
-		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"  class="errorField"></div>
-
+		<!-- <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"  class="errorField"></div> -->
+		
 		<div>
-			<label>Email:</label> <input type="text" id="name"
-				name="name" th:field="*{name}" /> <br />
+			<label>Last Name:</label> <input type="text" id="name" name="lastname"
+				th:field="*{lastName}" /> <br />		
+		<div>
+			<label>User Name:</label> <input type="text" id="name" name="username"
+				th:field="*{username}" /> <br />
+		</div>		
+		
+		<div>
+			<label>Email:</label> <input type="text" id="email"
+				name="email" th:field="*{email}" /> <br />
 		</div>
-		<div class="errorField"></div>
-
-		<div>
+		
 			<label>Password:</label> <input type="text"
 				id="password" name="password" th:field="*{password}" /> <br />
 		</div>
-		<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"  class="errorField"></div>
+		
 		<button type="submit">Save User</button>
 	</form>
+	
+	<p class="text-center">Already a member?<a th:href="@{/login}">Log in</a></p>  
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

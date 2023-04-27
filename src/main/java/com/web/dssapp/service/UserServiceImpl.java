@@ -27,6 +27,12 @@ public class UserServiceImpl implements UserService {
 	private RoleRepository roleRepository;
 	private PasswordEncoder passwordEncoder;
 	
+	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+			PasswordEncoder passwordEncoder) {
+		this.userRepository = userRepository;
+		this.roleRepository = roleRepository;
+		this.passwordEncoder = passwordEncoder;
+	}
 	
 
 	@Override
@@ -39,11 +45,10 @@ public class UserServiceImpl implements UserService {
 		newUser.setId(maxid()+1);
 		// encrypt the password once we integrate spring security		
 		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-		Role role = roleRepository.findRoleByName("ROLE_ADMIN");
-		if (role == null) {
-			role = checkRoleExist();
-		}
-		newUser.setRoles(Arrays.asList(role));
+		/*
+		 * Role role = roleRepository.findRoleByName("ROLE_ADMIN"); if (role == null) {
+		 * role = checkRoleExist(); } newUser.setRoles(Arrays.asList(role));
+		 */
 		userRepository.save(newUser);
 	}
 
