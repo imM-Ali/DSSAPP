@@ -12,32 +12,43 @@
 	<h1>Add User</h1>
 	<form th:action="@{/signup}" th:object="${user}" method="post">
 		<div>
-			<label>First Name:</label> <input type="text" id="name" name="firstname"
-				th:field="*{firstName}" /> <br />
+			<label>First Name:</label> <input type="text" id="name"
+				name="firstname" th:field="*{firstName}" /> <br />
 		</div>
-		<!-- <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"  class="errorField"></div> -->
+		<div th:if="${#fields.hasErrors('firstName')}"
+			th:errors="*{firstName}" class="errorField"></div>
+		<div>
+			<label>Last Name:</label> <input type="text" id="name"
+				name="lastname" th:field="*{lastName}" /> <br />
+		</div>
+		<div th:if="${#fields.hasErrors('lastName')}"
+			th:errors="*{lastName}" class="errorField"></div>
 		
 		<div>
-			<label>Last Name:</label> <input type="text" id="name" name="lastname"
-				th:field="*{lastName}" /> <br />		
-		<div>
-			<label>User Name:</label> <input type="text" id="name" name="username"
-				th:field="*{username}" /> <br />
-		</div>		
-		
-		<div>
-			<label>Email:</label> <input type="text" id="email"
-				name="email" th:field="*{email}" /> <br />
+			<label>User Name:</label> <input type="text" id="name"
+				name="username" th:field="*{username}" /> <br />
 		</div>
-		
-			<label>Password:</label> <input type="text"
-				id="password" name="password" th:field="*{password}" /> <br />
+		<div th:if="${#fields.hasErrors('username')}"
+			th:errors="*{username}" class="errorField"></div>
+		<div>
+			<label>Email:</label> <input type="text" id="email" name="email"
+				th:field="*{email}" /> <br />
 		</div>
-		
+		<div th:if="${#fields.hasErrors('email')}"
+			th:errors="*{email}" class="email"></div>
+		<div>
+		<label>Password:</label> <input type="text" id="password"
+			name="password" th:field="*{password}" /> <br />
+		</div>
+		<div th:if="${#fields.hasErrors('password')}"
+			th:errors="*{password}" class="password"></div>
+
 		<button type="submit">Save User</button>
 	</form>
-	
-	<p class="text-center">Already a member?<a th:href="@{/login}">Log in</a></p>  
+
+	<p class="text-center">
+		Already a member?<a th:href="@{/login}">Log in</a>
+	</p>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

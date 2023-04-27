@@ -37,19 +37,20 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public String registration(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
-
+		if (result.hasErrors()) {
+			return "signuppage";
+		} 
+		
 		User existing = userService.findByEmail(user.getEmail());
 		if (existing != null) {
 			result.rejectValue("email", null, "There is already an account registered with that email");
+			return "signuppage";
 		}
 		// checks if there is any field is invalid
-		else if (result.hasErrors()) {
-			return "signuppage";
-		} else {
+		
 			userService.saveUser(user);
 			model.addAttribute("user", user);
-			
-		}		
+							
 		
 		return "redirect:/login";
 	}

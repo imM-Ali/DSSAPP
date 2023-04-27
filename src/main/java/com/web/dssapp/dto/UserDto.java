@@ -1,6 +1,9 @@
 package com.web.dssapp.dto;
 
+import org.springframework.data.annotation.Id;
+
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +16,18 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto
 {
-	private int _id;
+	@Id
+    private int _id;
+    @NotBlank(message = "First Name should not be empty")
     private String firstName;
+    @NotBlank(message = "Last name should not be empty")
     private String lastName;
+    @NotBlank(message = "Username should not be empty")
     private String username;
-    private String email;
+    @NotBlank(message = "Email should not be empty")
+    @Email
+    private String email;   
+    @NotBlank(message = "Password should not be empty")
     private String password;
 	public int get_Id() {
 		return _id;
