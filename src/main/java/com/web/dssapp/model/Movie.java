@@ -1,6 +1,8 @@
 package com.web.dssapp.model;
 
 import java.util.Date;
+
+import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,6 +20,7 @@ public class Movie {
 	private String directedBy;
 	@NotBlank(message = "Cast cannot be empty")
 	private String starring;
+	@Range(min=0, max=5, message="Rating must be between 0 and 5")
 	private double avgRating;
 	private String dateAdded = new Date().toString();
 	private String imdbId;

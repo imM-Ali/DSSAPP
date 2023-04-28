@@ -43,7 +43,7 @@
 		<div th:if="${#fields.hasErrors('starring')}" th:errors="*{starring}"  class="errorField"></div>
 
 		<div>
-			<label>Current rating (1-5)</label> <input type="number"
+			<label>Current rating (1-5)</label> <input type="number" step="0.01"
 				id="avgRating" name="avgRating" th:field="*{avgRating}" /> <br />
 		</div>
 		<div class="errorField"></div>
