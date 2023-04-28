@@ -76,6 +76,7 @@ public class MovieController {
 	@PostMapping("/updateMovie/{id}")
 	public String saveEditedMovie(@PathVariable("id") int id, @Valid Movie movieDTO, BindingResult res, RedirectAttributes redirAttrs, Model model) {	
 		if(res.hasErrors()) {
+			movieDTO.set_id(id);
 			model.addAttribute("movie", movieDTO);
 			return "editmoviepage";
 		}
