@@ -15,6 +15,9 @@ public interface UserRepository extends MongoRepository<User, Integer> {
 	@Query("{email:'?0'}")
     User findUserByEmail(String email);
 	
+	@Query("{role:'?0'}")
+    User findUserByRole(String role);
+	
 	@Aggregation(pipeline = { "{$group: { _id: '', total: {$max: $_id }}}" })
 	public int maxid();
 }

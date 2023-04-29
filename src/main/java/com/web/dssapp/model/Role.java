@@ -11,17 +11,13 @@ import java.util.List;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @Data
 @Document(collection="role")
 public class Role
 {
     @Id    
     private int id;
-    
     private String name;
-    
-    private List<User> users;
     
     public Role(int id, String name) {
     	this.id = id;

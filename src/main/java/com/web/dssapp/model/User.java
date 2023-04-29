@@ -38,8 +38,8 @@ public class User
     private String email;   
     @NotBlank(message = "Password should not be empty")
     private String password;
-    
-    private List<Role> roles = new ArrayList<>();
+    @NotBlank(message = "Role should not be empty")
+    private String role;
 	
 	public int get_id() {
 		return _id;
@@ -77,11 +77,11 @@ public class User
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public List<Role> getRoles() {
-		return roles;
+	public String getRoles() {
+		return role;
 	}
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRoles(String role) {
+		this.role = role;
 	}
   
 	public void updateAll(@Valid User user) {

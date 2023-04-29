@@ -45,10 +45,7 @@ public class UserServiceImpl implements UserService {
 		newUser.set_id(maxid()+1);
 		// encrypt the password once we integrate spring security		
 		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-		/*
-		 * Role role = roleRepository.findRoleByName("ROLE_ADMIN"); if (role == null) {
-		 * role = checkRoleExist(); } newUser.setRoles(Arrays.asList(role));
-		 */
+		newUser.setRole(user.getRole());
 		userRepository.save(newUser);
 	}
 
@@ -91,15 +88,6 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
-	
-
-	private Role checkRoleExist() {
-		Role role = new Role();
-		role.setName("ROLE_ADMIN");
-		return roleRepository.save(role);
-	}
-
 	
 	@Override
 	public int maxid() {
@@ -109,6 +97,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByusername(String username) {
 		return userRepository.findUserByusername(username);
+	}
+	
+	public User findByRole(String role) {
+		return userRepository.findUserByRole(role);
 	}
 
 }

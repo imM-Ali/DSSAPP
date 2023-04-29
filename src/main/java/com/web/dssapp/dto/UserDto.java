@@ -2,6 +2,7 @@ package com.web.dssapp.dto;
 
 import org.springframework.data.annotation.Id;
 
+import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
 
 import jakarta.validation.Valid;
@@ -32,6 +33,8 @@ public class UserDto
     private String email;   
     @NotBlank(message = "Password should not be empty")
     private String password;
+    @NotBlank(message = "Role should not be empty")
+    private String role;
 	public int get_id() {
 		return _id;
 	}
