@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.web.dssapp.model.Role;
+import com.web.dssapp.service.RoleService;
 import com.web.dssapp.model.User;
 
 
@@ -16,6 +17,7 @@ public class CustomUserDetails implements UserDetails {
 	
 	
 	private User user;
+	private RoleService roleService;
 
 	
 	public CustomUserDetails(User user) {
@@ -26,9 +28,8 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		for (Role role : user.getRoles()) {
-			list.add(new SimpleGrantedAuthority(role.toString()));
-		}
+		Role role = roleService.getRoleByName(user.getRole());
+		list.add(new SimpleGrantedAuthority(role.toString()));
         return list;
 	}
 	

@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.web.dssapp.model.Movie;
+import com.web.dssapp.model.User;
 import com.web.dssapp.model.Role;
 import com.web.dssapp.service.RoleService;
+import com.web.dssapp.service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -22,7 +23,8 @@ import jakarta.validation.Valid;
 public class RoleController {
 	
 	@Autowired
-	private RoleService roleService;
+	private RoleService roleService;	
+	private UserService userService;
 	
 	@GetMapping("/roles")
 	public String home(Model model) {			
@@ -76,7 +78,7 @@ public class RoleController {
 			return "redirect:/roles" ;
 		} else {
 			redirAttrs.addFlashAttribute("status", "Role ID does not exist");
-			return "redirect:/editmovie/{"+id+"}";
+			return "redirect:/editrole/{"+id+"}";
 		}
 	}
 
@@ -91,9 +93,10 @@ public class RoleController {
 
 	@GetMapping("/roleDetail/{id}")
 	public String roleDetail(@PathVariable("id") int id, Model model) {
-		model.addAttribute("movie", roleService.getRoleById(id).get());
-		
-		// implement here somthing to show all the users from that role
+		Role role = roleService.getRoleById(id).get();
+		List<User> allUsers = userService.findUsersByRole(role.getName());
+		model.addAttribute("role", roleService.getRoleById(id).get());
+		model.addAttribute("users", allUsers);
 		
 		return "detailrolepage";		
 	}

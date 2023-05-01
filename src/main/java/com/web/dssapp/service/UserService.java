@@ -8,9 +8,6 @@ import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-
 public interface UserService {
     void saveUser(@Valid UserDto user);
     User findByusername(String username);
@@ -20,6 +17,7 @@ public interface UserService {
     Boolean updateUser(User user, UserDto userDto);
     Optional<User> findUserById (int id);
     String deleteUserById(int id);
+    public List<User> findUsersByRole(String role);
     public int maxid();
     
 }

@@ -44,13 +44,12 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public Boolean deleteRoleById(int id) {
+	public String deleteRoleById(int id) {
 		try {
 			roleRepository.deleteById(id);
-			return true;
+			return "Role deleted successfully";
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
+			return e.getMessage();
 		}
 	}
 

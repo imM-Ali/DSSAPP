@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -99,8 +100,18 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByusername(username);
 	}
 	
-	public User findByRole(String role) {
-		return userRepository.findUserByRole(role);
+	@Override
+	public List<User> findUsersByRole(String role) {
+		List<User> users = new ArrayList<User>();
+		
+		users = userRepository.findAll();
+		for(User user : users) {
+			if (user.getRole() != role) {
+				users.remove(user);
+			}
+		}
+		
+		return users;
 	}
 
 }
