@@ -38,7 +38,7 @@ public class MovieController {
 		model.addAttribute("movies", allMovies);
 		model.addAttribute("currentPage", pageNumber);
 		model.addAttribute("totalPages", pagedMovies.getTotalPages());
-		model.addAttribute("totalItems", pagedMovies.getTotalElements());
+		model.addAttribute("totalItems", pagedMovies.getTotalElements());	
 		return "moviespage";
 	}	
 
