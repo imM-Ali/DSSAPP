@@ -4,6 +4,8 @@ package com.web.dssapp.config;
 import com.web.dssapp.model.*;
 import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
+import com.web.dssapp.service.RoleServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,20 +21,23 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
-	private RoleRepository roleRepository;
+    private RoleRepository roleRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+        User user = userRepository.findUserByusername(name);
 
-		User user = userRepository.findUserByusername(name);
-
-		if (user != null) {
-
-			return new CustomUserDetails(user);
-		} else {
-			throw new UsernameNotFoundException("Invalid username or password.");
-		}
-	}
+        if (user != null) {
+            return new CustomUserDetails(user, roleRepository); // pass roleRepository to constructor
+        } else {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+    }
 
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		Collection<? extends GrantedAuthority> mapRoles = roles.stream()
