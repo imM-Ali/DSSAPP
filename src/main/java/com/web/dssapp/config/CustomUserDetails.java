@@ -31,7 +31,7 @@ public class CustomUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		
-		Optional<Role> a = roleRepository.findRoleById(user.getRole_id());
+		Optional<Role> a = roleRepository.findById(user.getRole_id());
 		
 		if (a.isPresent()) {
 			list.add(new SimpleGrantedAuthority(a.get().toString()));

@@ -17,9 +17,6 @@ public interface RoleRepository extends MongoRepository<Role, Integer> {
 	@SuppressWarnings("unchecked")
 	Role save(Role role);
 	
-	
-	@Query("{ _id :'?0'}")
-    Optional<Role> findRoleById(Integer id);
 
 	void deleteById(int id);
 

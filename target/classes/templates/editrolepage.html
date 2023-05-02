@@ -10,8 +10,8 @@
 </head>
 <body>
     <h1>Edit Role</h1>
-    <form th:action="@{|/editrole/${role._id}|}" th:object="${role}" method="post">
-        <input type="hidden" th:field="*{id}">
+    <form th:action="@{|/editRole/${role._id}|}" th:object="${role}" method="post">
+        <input type="hidden" th:field="*{_id}">
         <label for="name">Name:</label><br>
         <input type="text" id="name" th:field="*{name}" required><br>
         <br>

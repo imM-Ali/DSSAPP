@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.web.dssapp.model.Role;
 import com.web.dssapp.service.RoleService;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.Valid;
 
 @Controller
@@ -59,20 +60,21 @@ public class RoleController {
 	@GetMapping("/editRole/{id}")
 	public String editRole(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {
 		Optional<Role> oldRole = roleService.getRoleById(id);
+		
 		if (oldRole.isPresent()) {
 			Role role = oldRole.get();
 			model.addAttribute("role", role);
 			return "editrolepage";
 		} else {
 			redirAttrs.addFlashAttribute("status", "Something went wrong");
-			return "redirect:/editRole";
+			return "redirect:/editRole/"+id;
 		}
 	}	
 
 	@PostMapping("/editRole/{id}")
 	public String editedRole(@PathVariable("id") int id, @Valid Role roleDTO, BindingResult res, RedirectAttributes redirAttrs, Model model) {	
+		roleDTO.set_id(id);
 		if(res.hasErrors()) {
-			roleDTO.set_id(id);
 			model.addAttribute("role", roleDTO);
 			return "editrolepage";
 		}

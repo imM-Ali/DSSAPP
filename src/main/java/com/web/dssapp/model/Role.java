@@ -18,9 +18,8 @@ public class Role
 {
     @Id 
     private int _id;
-    private String name;
+    private String name;    
     
-    private List<User> users;
     
     public Role(int id, String name) {
     	this._id = id;
