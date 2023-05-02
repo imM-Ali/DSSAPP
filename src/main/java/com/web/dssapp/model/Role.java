@@ -11,17 +11,23 @@ import java.util.List;
 
 @Setter
 @Getter
+@AllArgsConstructor
 @Data
 @Document(collection="roles")
 public class Role
 {
-    @Id    
+    @Id 
     private int _id;
     private String name;
+    
+    private List<User> users;
     
     public Role(int id, String name) {
     	this._id = id;
     	this.name = name;
+    }
+    public Role() {
+    	
     }
 
 	public int get_id() {

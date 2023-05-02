@@ -38,8 +38,11 @@ public class User
     private String email;   
     @NotBlank(message = "Password should not be empty")
     private String password;
+
     @NotBlank(message = "Role should not be empty")
     private int role_id;
+
+
 	
 	public int get_id() {
 		return _id;
@@ -77,6 +80,7 @@ public class User
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
   
 	public int getRole_id() {
 		return role_id;
