@@ -13,17 +13,7 @@ import com.web.dssapp.model.Role;
 		public List<Role> getAllRoles();
 		public Role getRoleByName(String role);
 		public Optional<Role> getRoleById(int id);
-		public String deleteRoleById(int id);
-		public void maxId();
-		public Boolean updateRole(Role role, Role roleDTO);
+		public Boolean deleteRoleById(int id);		
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-
-}

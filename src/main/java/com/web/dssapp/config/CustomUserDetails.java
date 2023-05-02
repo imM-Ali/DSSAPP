@@ -12,13 +12,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
+import com.web.dssapp.service.RoleServiceImpl;
 
 
 public class CustomUserDetails implements UserDetails {
 	
 	
 	private User user;
-	private RoleRepository rs;
+	private RoleServiceImpl impl;
+	
 	
 	public CustomUserDetails(User user) {
 		super();
@@ -29,10 +31,10 @@ public class CustomUserDetails implements UserDetails {
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
 		
-		Optional<Role> a = rs.findById(user.getRole_id());
+		Optional<Role> a = impl.getRoleById(user.getRole_id());
 		
 		
-		//	list.add(new SimpleGrantedAuthority(rs.findById(user.getRole_id()).get()));
+			list.add(new SimpleGrantedAuthority(a.get().toString()));
 			 return list;
 		}
        

@@ -4,20 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
 
+
+@Service
 public class RoleServiceImpl implements RoleService{
 	
+	@Autowired
 	private RoleRepository roleRepository;
-	private int maxid;
+	
 
 	@Override
 	public Boolean addRole(Role role) {
-		try {
-			maxId();
-			role.setId(maxid + 1);
+		try {		
+			//by default every new sign up will be classes as a normal user
+			role.set_id(1);
 			roleRepository.save(role);
 			return true;
 		} catch (Exception e) {
@@ -32,8 +38,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public Role getRoleByName(String role) {
-		// TODO Auto-generated method stub
+	public Role getRoleByName(String role) {		
 		return roleRepository.findRoleByName(role);
 	}
 	
@@ -54,27 +59,5 @@ public class RoleServiceImpl implements RoleService{
 		}
 	}
 
-	@Override
-	public void maxId() {
-		this.maxid = roleRepository.maxid();
-		
-	}
-
-	@Override
-	public Boolean updateRole(Role role, Role roleDTO) {
-		try {
-			role.setId(roleDTO.getId());
-			role.setName(roleDTO.getName());
-			List<User> list = new ArrayList<User>();
-			for(User user : list) {
-				user.setRole(roleDTO.getName());
-			}
-			roleRepository.save(role);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-		
-	}
 
 }

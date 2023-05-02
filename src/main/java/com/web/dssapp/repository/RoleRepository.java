@@ -21,9 +21,5 @@ public interface RoleRepository extends MongoRepository<Role, Integer> {
 	@Query("{id:'?0'}")
     Optional<Role> findRoleById(int id);
 
-	
-	@Aggregation(pipeline = { "{$group: { _id: '', total: {$max: $_id }}}" })
-	public int maxid();
-
 	void deleteById(int id);
 }

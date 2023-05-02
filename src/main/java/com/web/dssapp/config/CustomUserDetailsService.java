@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		if (user != null) {
 
-			return new CustomUserDetails(user, roleRepository);
+			return new CustomUserDetails(user);
 		} else {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}

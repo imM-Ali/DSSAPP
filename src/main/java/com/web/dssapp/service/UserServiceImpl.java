@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
 			user.setUsername(userDto.getUsername());
 			user.setEmail(userDto.getEmail());
 			user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+			user.setRole_id(userDto.getRole_id());
 			userRepository.save(user);
 			return true;
 		} catch (Exception e) {
@@ -95,14 +96,6 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
-
-	
-
-	private Role checkRoleExist() {
-		Role role = new Role();
-		role.setName("ROLE_ADMIN");
-		return roleRepository.save(role);
-	}
 
 	
 	@Override
