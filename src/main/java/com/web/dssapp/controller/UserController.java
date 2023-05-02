@@ -34,44 +34,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	/*
-	 * @GetMapping("/users/{pageNumber}") public String home(@PathVariable(value =
-	 * "pageNumber", required = false) int pageNumber, Model model) { // Page<User>
-	 * pagedMovies = //
-	 * userService.findAllUsersP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
-	 * 
-	 * List<User> allUsers = pagedMovies.getContent(); model.addAttribute("users",
-	 * allUsers); model.addAttribute("currentPage", pageNumber);
-	 * model.addAttribute("totalPages", pagedMovies.getTotalPages());
-	 * model.addAttribute("totalItems", pagedMovies.getTotalElements());
-	 * 
-	 * return "userspage"; }
-	 */
-
-	@GetMapping("/addUser")
-	public String addUser(Model model) {
-		model.addAttribute("user", new User());
-		return "adduserpage";
-	}
-
-	@PostMapping("/addUser")
-	public String adduser(@Valid UserDto user, BindingResult bindingResult, RedirectAttributes atr) {
-		if (bindingResult.hasErrors()) {
-			return "adduserpage";
-		}
-
-		userService.saveUser(user);
-		atr.addFlashAttribute("status", "User saved successfully with user Id: " + user.get_id());
-		return "redirect:/user/1";
-
-	}
-
-	@GetMapping("/viewuserdetails/{id}")
-	public String viewUserDetails(@PathVariable("id") int id, Model model) {
-		model.addAttribute("user", userService.findUserById(id).get());
-		return "userdetailpage";
-
-	}
 
 	@GetMapping("/edituser/{id}")
 	public String editUser(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {

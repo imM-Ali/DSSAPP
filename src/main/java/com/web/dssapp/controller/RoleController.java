@@ -27,6 +27,7 @@ public class RoleController {
 
 	@Autowired
 	private RoleService roleService;
+	
 	@GetMapping("/noaccess")
 	public String noAccesshandler(RedirectAttributes rt) {
 		rt.addFlashAttribute("status", "You do not have the right permissions to view this page");		

@@ -18,10 +18,13 @@
 
 </div>
 
-<div th:if="${currentaccess == 'admin'}">
+<div class="row text-center" th:if="${currentaccess == 'admin'}">
 
-<div class="">
+<div class="col-6 text-center">
 		<a th:href="@{/roles}"><button>View roles</button></a>
+	</div>
+	<div class="col-6 text-center">
+		<a th:href="@{/users/1}"><button>View Users</button></a>
 	</div>
 
 </div>
