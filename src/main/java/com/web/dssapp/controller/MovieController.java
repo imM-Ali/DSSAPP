@@ -33,7 +33,7 @@ public class MovieController {
 	
 	@GetMapping("/movies/{pageNumber}")
 	public String home(@PathVariable(value ="pageNumber", required=false) int pageNumber,Model model) {			
-		Page<Movie> pagedMovies = movieService.getAllMovies(pageNumber,50,Sort.by(Sort.Direction.ASC, "_id"));
+		Page<Movie> pagedMovies = movieService.getAllMovies(pageNumber,15,Sort.by(Sort.Direction.ASC, "_id"));
 		List<Movie> allMovies = pagedMovies.getContent();		
 		model.addAttribute("movies", allMovies);
 		model.addAttribute("currentPage", pageNumber);

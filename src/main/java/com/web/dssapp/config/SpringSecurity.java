@@ -57,6 +57,7 @@ public class SpringSecurity {
 	            try {
 	                authz.requestMatchers("/signup","/login").permitAll()
 	                .requestMatchers("/roles").hasAuthority("admin")
+	                .requestMatchers("users/**").hasAuthority("admin")
 	                    .anyRequest().authenticated()
 	                    .and().exceptionHandling().accessDeniedPage("/noaccess").and()	                    
 	                    .formLogin(login -> login
