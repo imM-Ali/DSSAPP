@@ -9,9 +9,23 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<div class="">
+
+<div th:if="${currentaccess == 'user'}">
+
+<div class="">
+		<p>Please request to become an admin</p>
+	</div>
+
+</div>
+
+<div th:if="${currentaccess == 'admin'}">
+
+<div class="">
 		<a th:href="@{/roles}"><button>View roles</button></a>
 	</div>
+
+</div>
+	
 </body>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
