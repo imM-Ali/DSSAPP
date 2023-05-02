@@ -3,6 +3,7 @@ package com.web.dssapp.config;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,13 +11,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
+import com.web.dssapp.repository.RoleRepository;
 
 
 public class CustomUserDetails implements UserDetails {
 	
 	
 	private User user;
-
+	private RoleRepository rs;
 	
 	public CustomUserDetails(User user) {
 		super();
@@ -26,11 +28,15 @@ public class CustomUserDetails implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		for (Role role : user.getRoles()) {
-			list.add(new SimpleGrantedAuthority(role.toString()));
+		
+		Optional<Role> a = rs.findById(user.getRole_id());
+		
+		
+		//	list.add(new SimpleGrantedAuthority(rs.findById(user.getRole_id()).get()));
+			 return list;
 		}
-        return list;
-	}
+       
+	
 	
 	public User getContext() {
 	return this.user;

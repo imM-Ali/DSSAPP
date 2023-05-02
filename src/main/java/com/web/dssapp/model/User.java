@@ -39,7 +39,7 @@ public class User
     @NotBlank(message = "Password should not be empty")
     private String password;
     @NotBlank(message = "Role should not be empty")
-    private String role;
+    private int role_id;
 	
 	public int get_id() {
 		return _id;
@@ -77,13 +77,13 @@ public class User
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRoles() {
-		return role;
-	}
-	public void setRoles(String role) {
-		this.role = role;
-	}
   
+	public int getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
+	}
 	public void updateAll(@Valid User user) {
 		
 		this._id = user.get_id();

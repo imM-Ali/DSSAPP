@@ -12,29 +12,34 @@ import java.util.List;
 @Setter
 @Getter
 @Data
-@Document(collection="role")
+@Document(collection="roles")
 public class Role
 {
     @Id    
-    private int id;
+    private int _id;
     private String name;
     
     public Role(int id, String name) {
-    	this.id = id;
+    	this._id = id;
     	this.name = name;
     }
 
-	public Role() {
-		// TODO Auto-generated constructor stub
+	public int get_id() {
+		return _id;
+	}
+
+	public void set_id(int _id) {
+		this._id = _id;
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
-	public void setName(String string) {
-		// TODO Auto-generated method stub
-		
+	public void setName(String name) {
+		this.name = name;
 	}
+
+
+	
 }

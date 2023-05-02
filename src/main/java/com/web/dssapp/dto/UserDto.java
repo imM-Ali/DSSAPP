@@ -34,9 +34,17 @@ public class UserDto
     @NotBlank(message = "Password should not be empty")
     private String password;
     @NotBlank(message = "Role should not be empty")
-    private String role;
+    private int role_id;
+    
+    
 	public int get_id() {
 		return _id;
+	}
+	public int getRole_id() {
+		return role_id;
+	}
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
 	public void set_id(int id) {
 		this._id = id;

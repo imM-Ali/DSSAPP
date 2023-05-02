@@ -2,6 +2,7 @@
 package com.web.dssapp.config;
 
 import com.web.dssapp.model.*;
+import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	private RoleRepository roleRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
@@ -26,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		if (user != null) {
 
-			return new CustomUserDetails(user);
+			return new CustomUserDetails(user, roleRepository);
 		} else {
 			throw new UsernameNotFoundException("Invalid username or password.");
 		}
