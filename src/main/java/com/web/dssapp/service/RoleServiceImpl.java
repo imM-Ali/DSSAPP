@@ -1,5 +1,6 @@
 package com.web.dssapp.service;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,7 @@ public class RoleServiceImpl implements RoleService{
 	public Boolean addRole(Role role) {
 		try {		
 			//by default every new sign up will be classes as a normal user
-			role.set_id(1);
+			role.set_id(maxid() + 1);
 			roleRepository.save(role);
 			return true;
 		} catch (Exception e) {
@@ -43,8 +44,7 @@ public class RoleServiceImpl implements RoleService{
 	}
 	
 	@Override
-	public Optional<Role> getRoleById(int id) {
-		// TODO Auto-generated method stub
+	public Optional<Role> getRoleById(Integer id) {
 		return roleRepository.findRoleById(id);
 	}
 
@@ -69,6 +69,12 @@ public class RoleServiceImpl implements RoleService{
 			return false;
 		}
 	}
+
+	@Override
+	public int maxid() {
+		return roleRepository.maxid();
+	}
+	
 
 
 }

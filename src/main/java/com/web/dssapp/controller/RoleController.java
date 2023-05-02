@@ -1,5 +1,6 @@
 package com.web.dssapp.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,13 @@ public class RoleController {
 	@Autowired
 	private RoleService roleService;
 
-	/*
-	 * @GetMapping("/roles/{pageNumber}") public String home(@PathVariable(value =
-	 * "pageNumber", required = false) int pageNumber, Model model) { // Page<Role>
-	 * pagedMovies = //
-	 * roleService.findAllRolesP(pageNumber,10,Sort.by(Sort.Direction.ASC, "_id"));
-	 * 
-	 * List<Role> allRoles = pagedMovies.getContent(); model.addAttribute("roles",
-	 * allRoles); model.addAttribute("currentPage", pageNumber);
-	 * model.addAttribute("totalPages", pagedMovies.getTotalPages());
-	 * model.addAttribute("totalItems", pagedMovies.getTotalElements());
-	 * 
-	 * return "rolespage"; }
-	 */
+	
+	@GetMapping("/roles")
+    public String getAllRoles(Model model) {
+        List<Role> roles = roleService.getAllRoles();
+        model.addAttribute("roles", roles);
+        return "rolespage";
+    }
 
 	@GetMapping("/addRole")
 	public String addRole(Model model) {
@@ -50,7 +45,7 @@ public class RoleController {
 
 		roleService.addRole(role);
 		atr.addFlashAttribute("status", "Role saved successfully with role Id: " + role.get_id());
-		return "redirect:/role";
+		return "redirect:/roles";
 
 	}
 
@@ -61,38 +56,39 @@ public class RoleController {
 
 	}
 
-	@GetMapping("/editrole/{id}")
+	@GetMapping("/editRole/{id}")
 	public String editRole(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {
 		Optional<Role> oldRole = roleService.getRoleById(id);
-		if (oldRole != null) {
-			model.addAttribute("role", oldRole.get());
+		if (oldRole.isPresent()) {
+			Role role = oldRole.get();
+			model.addAttribute("role", role);
 			return "editrolepage";
 		} else {
 			redirAttrs.addFlashAttribute("status", "Something went wrong");
-			return "redirect:/editrole";
+			return "redirect:/editRole";
 		}
-	}
+	}	
 
-	@PostMapping("/editrole/{id}")
+	@PostMapping("/editRole/{id}")
 	public String editedRole(@PathVariable("id") int id, @Valid Role roleDTO, BindingResult res, RedirectAttributes redirAttrs, Model model) {	
 		if(res.hasErrors()) {
 			roleDTO.set_id(id);
 			model.addAttribute("role", roleDTO);
 			return "editrolepage";
 		}
-		Optional<Role> oldMov = roleService.getRoleById(id);
-		if (oldMov != null) {
-			Role existingRole = oldMov.get();
+		Optional<Role> oldRole = roleService.getRoleById(id);
+		if (oldRole.isPresent()) {
+			Role existingRole = oldRole.get();
 			roleService.updateRole(existingRole, roleDTO);
 			redirAttrs.addFlashAttribute("status", "Role ID: " + id + " saved successfully!");
-			return "redirect:/roles/1" ;
+			return "redirect:/roles" ;
 		} else {
 			redirAttrs.addFlashAttribute("status", "Role ID does not exist");
-			return "redirect:/editrole/{"+id+"}";
+			return "redirect:/editRole/{"+id+"}";
 		}
 	}
 
-	@GetMapping("/deleterole/{id}")
+	@GetMapping("/deleteRole/{id}")
 	public String deleteRole(@PathVariable("id") int id, RedirectAttributes redirAttrs) {
 
 		String msg = roleService.deleteRoleById(id);
