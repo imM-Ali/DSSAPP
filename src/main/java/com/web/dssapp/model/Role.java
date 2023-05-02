@@ -23,6 +23,10 @@ public class Role
     	this._id = id;
     	this.name = name;
     }
+    
+    public Role() {
+    	
+    }
 
 	public int get_id() {
 		return _id;

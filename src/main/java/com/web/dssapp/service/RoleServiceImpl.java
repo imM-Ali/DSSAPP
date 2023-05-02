@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
 
+@Service
 public class RoleServiceImpl implements RoleService{
 	
 	private RoleRepository roleRepository;
@@ -17,7 +20,7 @@ public class RoleServiceImpl implements RoleService{
 	public Boolean addRole(Role role) {
 		try {
 			maxId();
-			role.setId(maxid + 1);
+			role.set_id(maxid + 1);
 			roleRepository.save(role);
 			return true;
 		} catch (Exception e) {
@@ -44,13 +47,12 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public Boolean deleteRoleById(int id) {
+	public String deleteRoleById(int id) {
 		try {
 			roleRepository.deleteById(id);
-			return true;
+			return "Role deleted successfully";
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
+			return e.getMessage();
 		}
 	}
 
@@ -63,11 +65,11 @@ public class RoleServiceImpl implements RoleService{
 	@Override
 	public Boolean updateRole(Role role, Role roleDTO) {
 		try {
-			role.setId(roleDTO.getId());
+			role.set_id(roleDTO.get_id());
 			role.setName(roleDTO.getName());
 			List<User> list = new ArrayList<User>();
 			for(User user : list) {
-				user.setRole(roleDTO.getName());
+				user.setRole_id(roleDTO.get_id());
 			}
 			roleRepository.save(role);
 			return true;

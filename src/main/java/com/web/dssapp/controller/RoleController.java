@@ -44,7 +44,7 @@ public class RoleController {
 		}
 
 		roleService.addRole(role);
-		atr.addFlashAttribute("status", "Role saved successfully with movie Id: " + role.getId());
+		atr.addFlashAttribute("status", "Role saved successfully with movie Id: " + role.get_id());
 		return "redirect:/roles";
 
 	}
@@ -64,7 +64,7 @@ public class RoleController {
 	@PostMapping("/updateRole/{id}")
 	public String saveEditedRole(@PathVariable("id") int id, @Valid Role roleDTO, BindingResult res, RedirectAttributes redirAttrs, Model model) {	
 		if(res.hasErrors()) {
-			roleDTO.setId(id);
+			roleDTO.set_id(id);
 			model.addAttribute("role", roleDTO);
 			return "editrolepage";
 		}

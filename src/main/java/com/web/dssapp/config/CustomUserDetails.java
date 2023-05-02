@@ -24,6 +24,12 @@ public class CustomUserDetails implements UserDetails {
 		super();
 		this.user = user;
 	}
+	
+	public CustomUserDetails(User user, RoleRepository rs) {
+		super();
+		this.user = user;
+		this.rs = rs;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
