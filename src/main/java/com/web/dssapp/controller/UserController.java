@@ -51,13 +51,13 @@ public class UserController {
 	@GetMapping("/addUser")
 	public String addUser(Model model) {
 		model.addAttribute("user", new User());
-		return "adduserpage";
+		return "signuppage";
 	}
 
 	@PostMapping("/addUser")
 	public String adduser(@Valid UserDto user, BindingResult bindingResult, RedirectAttributes atr) {
 		if (bindingResult.hasErrors()) {
-			return "adduserpage";
+			return "signuppage";
 		}
 
 		userService.saveUser(user);
