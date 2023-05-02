@@ -19,25 +19,17 @@ public class CustomUserDetails implements UserDetails {
 	
 	
 	private User user;
-	private RoleRepository roleRepository;
+	Collection<? extends GrantedAuthority> authorities;
 
-    public CustomUserDetails(User user, RoleRepository roleRepository) {
+    public CustomUserDetails(User user,Collection<? extends GrantedAuthority> authorities) {
 		super();
 		this.user = user;
-		this.roleRepository = roleRepository;
+		this.authorities = authorities;
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-		
-		Optional<Role> a = roleRepository.findById(user.getRole_id());
-		
-		if (a.isPresent()) {
-			list.add(new SimpleGrantedAuthority(a.get().toString()));
-		}
-		
-		return list;
+		return this.authorities;
 	}
        
 	

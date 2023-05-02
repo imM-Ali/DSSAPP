@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -33,15 +35,16 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userRepository.findUserByusername(name);
 
         if (user != null) {
-            return new CustomUserDetails(user, roleRepository); // pass roleRepository to constructor
+        	Collection<? extends GrantedAuthority> authorities = mapRolesToAuthorities(roleRepository.findById(user.getRole_id()).get());
+            return new CustomUserDetails(user, authorities); // pass roleRepository to constructor
         } else {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
     }
 
-	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
-		Collection<? extends GrantedAuthority> mapRoles = roles.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-		return mapRoles;
+	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Role role) {
+	    Collection<GrantedAuthority> authorities = new ArrayList<>();
+	    authorities.add(new SimpleGrantedAuthority(role.getName()));
+	    return authorities;
 	}
 }
