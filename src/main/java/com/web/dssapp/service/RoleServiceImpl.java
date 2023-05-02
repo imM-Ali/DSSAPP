@@ -49,12 +49,23 @@ public class RoleServiceImpl implements RoleService{
 	}
 
 	@Override
-	public Boolean deleteRoleById(int id) {
+	public String deleteRoleById(int id) {
 		try {
 			roleRepository.deleteById(id);
+			return "Role deleted successfully";
+		} catch (Exception e) {
+			return e.getMessage();
+		}
+	}
+
+	@Override
+	public Boolean updateRole(Role role, Role roleDTO) {
+		try {
+			role.set_id(roleDTO.get_id());
+			role.setName(roleDTO.getName());
+			roleRepository.save(role);
 			return true;
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 			return false;
 		}
 	}
