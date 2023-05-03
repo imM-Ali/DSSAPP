@@ -1,7 +1,5 @@
 package com.web.dssapp.service;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.dssapp.model.Role;
-import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
 
 

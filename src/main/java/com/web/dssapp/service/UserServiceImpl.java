@@ -2,7 +2,6 @@
 package com.web.dssapp.service;
 
 import com.web.dssapp.dto.UserDto;
-import com.web.dssapp.model.Role;
 import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 

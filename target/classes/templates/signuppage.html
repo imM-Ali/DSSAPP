@@ -1,60 +1,110 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Add User</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-</head>
-<body>
-	<h1>Add User</h1>
-	<form th:action="@{/signup}" th:object="${user}" method="post">
-		<div>
-			<label>First Name:</label> <input type="text" id="name"
-				name="firstname" th:field="*{firstName}" /> <br />
-		</div>
-		<div th:if="${#fields.hasErrors('firstName')}"
-			th:errors="*{firstName}" class="errorField"></div>
-		<div>
-			<label>Last Name:</label> <input type="text" id="name"
-				name="lastname" th:field="*{lastName}" /> <br />
-		</div>
-		<div th:if="${#fields.hasErrors('lastName')}"
-			th:errors="*{lastName}" class="errorField"></div>
-		
-		<div>
-			<label>User Name:</label> <input type="text" id="name"
-				name="username" th:field="*{username}" /> <br />
-		</div>
-		<div th:if="${#fields.hasErrors('username')}"
-			th:errors="*{username}" class="errorField"></div>
-		<div>
-			<label>Email:</label> <input type="text" id="email" name="email"
-				th:field="*{email}" /> <br />
-		</div>
-		<div th:if="${#fields.hasErrors('email')}"
-			th:errors="*{email}" class="email"></div>
-		<div>
-		<label>Password:</label> <input type="text" id="password"
-			name="password" th:field="*{password}" /> <br />
-		</div>
-		<div th:if="${#fields.hasErrors('password')}"
-			th:errors="*{password}" class="password"></div>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CCT IMDB</title>
 
-		<button type="submit">Save User</button>
-	</form>
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="canonical"
+      href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
+    />
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
 
-	<p class="text-center">
-		Already a member?<a th:href="@{/login}">Log in</a>
-	</p>
-</body>
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="row navbar navbar-expand-sm">
+        <div class="col-4">
+          <div class="container-fluid">
+            <img
+              src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
+            />            
+          </div>
+        </div>        
+      </nav>  
+      <div class="container">
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+
+	  	<form class="w-50 mx-auto mt-5" th:action="@{/signup}" th:object="${user}" method="post">
+        <span><p th:if="${param.error}" class="form-text alert alert-danger">Invalid Credentials</p></span> 
+		<div th:if="${#fields.hasErrors('firstName') || #fields.hasErrors('lastName') || #fields.hasErrors('username') || #fields.hasErrors('email') || #fields.hasErrors('password')}" class="errorField">
+			<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
+			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
+			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="email"></div>
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="password"></div>
+		  </div>
+				 
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text" id="firstname" name="firstname" th:field="*{firstName}" autocomplete="off" class="form-control form-control-sm">  
+        </div>
+		<div class="mb-3">
+			<label class="form-label">Last Name</label>
+			<input type="text" id="lastname" name="lastname" th:field="*{lastName}" autocomplete="off" class="form-control form-control-sm">  
+		  </div>
+		  <div class="mb-3">
+			<label class="form-label">User Name</label>
+			<input type="text" id="username" name="username" th:field="*{username}" autocomplete="off" class="form-control form-control-sm">  
+		  </div>
+		  <div class="mb-3">
+			<label class="form-label">Email</label>
+			<input type="email" id="email" name="email" th:field="*{email}" autocomplete="off" class="form-control form-control-sm">  
+		  </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" name="password" th:field="*{password}" autocomplete="off" class="form-control form-control-sm" >                
+        </div>
+		<input type="number" hidden id="role_id" name="role_id" th:field="*{role_id}" th:value="2" class="form-control form-control-sm">        
+        <button type="submit" class="btn btn-primary">Register</button>        
+      </form>
+	 
+
+
+
+    </div>    
+		  
+		 <footer class="container fixed-bottom">
+			<hr class="featurette-divider">		  
+		   <p>&copy; CCT College, Dublin. &middot;</p>
+		 </footer>
+	   
+    </div>
+  </body>  
 </html>
+
 

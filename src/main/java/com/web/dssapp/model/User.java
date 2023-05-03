@@ -1,16 +1,8 @@
 package com.web.dssapp.model;
 
 import lombok.*;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
-import org.springframework.data.mongodb.core.mapping.FieldType;
-
-import com.web.dssapp.dto.UserDto;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -38,8 +30,6 @@ public class User
     private String email;   
     @NotBlank(message = "Password should not be empty")
     private String password;
-
-    @NotBlank(message = "Role should not be empty")
     private int role_id;
 
 
@@ -96,7 +86,7 @@ public class User
 		this.lastName = user.getLastName();
 		this.password = user.getPassword();
 		this.username = user.getUsername();	
-		
+		this.role_id = user.getRole_id();
 		
 		
 	}

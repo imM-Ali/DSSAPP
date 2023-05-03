@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.annotation.Generated;
 import jakarta.validation.constraints.NotBlank;
 
 
@@ -43,6 +42,10 @@ public class Movie {
 		this.starring = starring;
 		this.avgRating = avgRating;
 
+	}
+
+	public String getdateAdded(){
+		return this.dateAdded;
 	}
 
 	public int get_id() {

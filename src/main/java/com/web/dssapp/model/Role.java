@@ -7,11 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.*;
 
-import java.util.List;
-
 @Setter
 @Getter
-@AllArgsConstructor
 @Data
 @Document(collection="roles")
 public class Role

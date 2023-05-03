@@ -4,8 +4,6 @@ package com.web.dssapp.config;
 import com.web.dssapp.model.*;
 import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
-import com.web.dssapp.service.RoleServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {

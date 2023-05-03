@@ -1,17 +1,8 @@
 package com.web.dssapp.controller;
 
-import java.util.List;
-
-import com.web.dssapp.config.CustomUserDetails;
-import com.web.dssapp.controller.MovieController;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,8 +15,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.web.dssapp.dto.UserDto;
 import com.web.dssapp.model.User;
 import com.web.dssapp.service.UserService;
-import com.web.dssapp.service.UserServiceImpl;
-
 import jakarta.validation.Valid;
 
 @Controller
