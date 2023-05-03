@@ -27,6 +27,7 @@
       href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
     />
     <style>
+
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -78,11 +79,17 @@
 			font-size: 100%;
 		 }
 		 .lead{
-			font-size: 14px;
+			font-size: 13px;
 		 }
 		 .Desc{
-			font-size: 16px;
+			font-size: 17px;
 		 }
+.moviename{
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+
     </style>
   </head>
   <body>
@@ -122,14 +129,8 @@
                 <a class="nav-link btn" th:href="@{/admin}">Admin Panel</a>
               </li>
               <li class="nav-item">
-                <form
-                  class="nav-link"
-                  tabindex="-1"
-                  name="logoutform"
-                  th:action="@{/logout}"
-                  method="post"
-                >
-                  <a type="submit">Log out</a>
+                <form name="logoutform" th:action="@{/logout}" method="post">
+                  <button type="submit" class="nav-link btn">Log out</button>
                 </form>
               </li>
             </ul>
@@ -140,10 +141,17 @@
 	
 		   <div class="row featurette pb-5" th:each="movie : ${movies}">
 			 <div class="col-md-7">	
-			   <h2 class="featurette-heading"><a class="btn moviename" th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}"></a></h2>
+			   <h2 class="featurette-heading"><a class="moviename" th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}"></a></h2>
 			   
 			   <p class="lead" th:text="${movie.starring}"></p>
-				 <p class="Desc" th:id="'movie-' + ${movie._id}"></p>
+				 <p class="Desc" th:id="'movie-' + ${movie._id}"></p>      
+        <label>Directed By:</label>
+        <span th:text="${movie.directedBy}"></span></br>
+        <label>Rating:</label>
+        <span th:text="${movie.avgRating}"></span></br>
+        <button class="btn btn-dark mx-auto mt-3" th:href="@{|/editmovie/${movie._id}|}">Edit</button>
+        <button  class="btn btn-danger mx-auto mt-3" th:href="@{|/deletemovie/${movie._id}|}">Delete</button>
+
 			 </div>
 			 <div class="col-md-5  text-right">
 			   <img th:id="'img-' + ${movie._id}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="250"
@@ -182,4 +190,3 @@
     </div>
   </body>  
 </html>
-
