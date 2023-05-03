@@ -149,9 +149,8 @@
         <span th:text="${movie.directedBy}"></span></br>
         <label>Rating:</label>
         <span th:text="${movie.avgRating}"></span></br>
-        <button class="btn btn-dark mx-auto mt-3" th:href="@{|/editmovie/${movie._id}|}">Edit</button>
-        <button  class="btn btn-danger mx-auto mt-3" th:href="@{|/deletemovie/${movie._id}|}">Delete</button>
-
+        <a th:href="@{|/editmovie/${movie._id}|}" class="btn btn-dark mx-auto mt-3">Edit</a>        
+        <a class="btn btn-danger mx-auto mt-3" th:href="@{|/deletemovie/${movie._id}|}">Delete</a>
 			 </div>
 			 <div class="col-md-5  text-right">
 			   <img th:id="'img-' + ${movie._id}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="250"
