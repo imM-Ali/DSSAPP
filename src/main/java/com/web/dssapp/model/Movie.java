@@ -23,17 +23,20 @@ public class Movie {
 	private double avgRating;
 	private String dateAdded = new Date().toString();
 	private String imdbId;
+
 	public String getImdbId() {
 		return imdbId;
 	}
-
+public void setImdbId(String imdbId) {
+		this.imdbId = imdbId;
+	}
 	
 
 	public Movie() {
 
 	}
 
-	public Movie(int _id, String txt, String title, String directedBy, String starring, double avgRating) {
+	public Movie(int _id, String txt, String title, String directedBy, String starring, double avgRating, String imdbId) {
 		super();
 		this._id = _id;
 		this.txt = txt;
@@ -41,6 +44,7 @@ public class Movie {
 		this.directedBy = directedBy;
 		this.starring = starring;
 		this.avgRating = avgRating;
+		this.imdbId = imdbId;
 
 	}
 
