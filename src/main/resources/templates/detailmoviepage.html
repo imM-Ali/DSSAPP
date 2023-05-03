@@ -1,122 +1,236 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Movie Details</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<style>
-nav {
-	background-color: transparent;
-	height: 15vh;
-	opacity: 1;
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CCT IMDB</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="canonical"
+      href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
+    />
+    <style>
+        body{
+        background-image: url(https://unsplash.com/photos/8zD7rs8UpxU/download?force=true);
+        background-position:top;       
+        background-repeat: no-repeat;
+        background-size: cover;  
+        background-attachment: fixed;   
+        
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+	  
+	 
+		 .featurette {
+		   margin-bottom: 4rem;
+		  
+		 }	 
+		 
+		 .featurette-heading {
+		   font-weight: 300;
+		   line-height: 1;
+		   letter-spacing: -.05rem;
+		 }
+	 
+	 
+		 @media (min-width: 40em) {
+	 
+		   /* Bump up size of carousel content */
+		   .carousel-caption p {
+			 margin-bottom: 1.25rem;
+			 font-size: 1.25rem;
+			 line-height: 1.4;
+		   }
+	 
+		   .featurette-heading {
+			 font-size: 30px;
+		   }
+		 }
+	 
+		 @media (min-width: 62em) {
+		   .featurette-heading {
+			 margin-top: 2.5rem;
+		   }
+		 }
+		 .moviename{
+			font-size: 100%;
+		 }
+		 .lead{
+			font-size: 13px;
+		 }
+		 .Desc{
+			font-size: 17px;
+		 }
+.moviename{
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+}
+.main{
+  opacity: 0.8;
 }
 
-.logo {
-	padding: 7vh 4vw;
+.pagenav{
+  position: fixed; 
+  bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 10px;
+    
+}
+.nav-link{
+  color: white;
+}
+.nav-link:hover{
+  color:black;
+  background-color:#f8f9fa;
 }
 
-.items ul {
-	list-style: none;
-	display: flex;
-	justify-content: flex-end;
-}
-
-.items ul li {
-	margin: 7vh 4vw 5vh 3vw;
-	font-size: large;
-	font-style: italic;
-}
-
-.items ul li a {
-	color: black;
-}
-
-.review {
-	margin: 15px 50px 50px 75px;
-}
-
-#Details {
-	text-align: center;
-}
-
-#img {
-	width: 100vw;
-	height: 35vh;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-}
-</style>
 
 
-<body>
-	<nav>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="row navbar navbar-expand-sm">
+        <div class="col-4">
+          <div class="container-fluid">
+            <img
+              src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
+            />
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+              aria-controls="navbarCollapse"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+        <div class="col-8">
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarCollapse"
+          >
+            <ul class="navbar-nav">             
+              <li class="nav-item active">
+                <a
+                  class="nav-link btn"                 
+                  th:href="@{|/viewuserdetails/${currentuser._id}|}"
+                >View Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn" th:href="@{/admin}">Admin Panel</a>
+              </li>
+              <li class="nav-item">
+                <form name="logoutform" th:action="@{/logout}" method="post">
+                  <button type="submit" class="nav-link btn">Log out</button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>     
+	
+	<div class="featurette bg-light pb-5">
 		<div class="row">
-			<div class="col-2 logo">
-				<span>LOGO</span>
+			<div class="col-md-12  text-center  pt-5">
+				<img th:id="'img-' + ${movie._id}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="250"
+				  height="300" xmlns="http://www.w3.org/2000/svg" focusable="false">				
+				</img>			 	
 			</div>
-			<div class="col-10 items">
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-
-				</ul>
+			<div class="col-md-10 mx-auto pt-5">
+				<h2 class="featurette-heading" th:text="${movie.title}"></h2>			   
+				<p class="lead" th:text="${movie.starring}"></p>
+				<p class="Desc" th:id="'movie-' + ${movie._id}"></p>      
+        		<label>Directed By:</label>
+        		<span th:text="${movie.directedBy}"></span></br>
+        		<label>Rating:</label>
+        		<span th:text="${movie.avgRating}"></span></br>
+        		<a th:href="@{|/editmovie/${movie._id}|}" class="btn btn-dark mx-auto mt-3">Edit</a>        
+        		<a class="btn btn-danger mx-auto mt-3" th:href="@{|/deletemovie/${movie._id}|}">Delete</a>
 			</div>
-
 		</div>
-	</nav>
-	<div id="img"></div>
-
-
-	<div id="Details">
-		<h1>Movie reviews from IMDb</h1>
-		<h3>Fetched with JS API</h3>
-	</div>
-	<div id="hero"></div>
-	<div>
+	<div class="row">
+		<div class="col-md-10 pt-3 mx-auto">
+			<h3>Reviews:</h3>
+		</div>
 		<span id="movieid" th:value="${movie.imdbId}"></span>
+		<div id="data"></div>
 	</div>
-
-</body>
-<script>
-const datUrl = "https://imdb-api.com/en/API/Reviews/k_qpexyd1w/tt" + document.getElementById("movieid").getAttribute("value"); 
-fetch(datUrl).then(data=>{
-return data.json()
-}).then(res=>{
 	
-	for(let i = 0; i < 3; i++) {
-	    let obj = res["items"][i];
-		document.getElementById("hero").innerHTML += "<div class='review'>"+obj.content+"</div>"
-	    
-	}
+
+	   
+    </div>
+  </body>
+  <script th:inline="javascript">
+	var link ='http://www.omdbapi.com/?i=tt'+/*[[${movie.imdbId}]]*/
 	
-	});
-
-</script>
-<script>
-const datUrl2 = "http://www.omdbapi.com/?i=tt" + document.getElementById("movieid").getAttribute("value")+"&apikey=6bd9464c"; 
-fetch(datUrl2).then(data=>{
-return data.json()
-}).then(res=>{
+	 fetch(link+"&apikey=6bd9464c")
+	   .then(function (response) {
+		 return response.json();
+	   })
+	   .then(function (data) {						
+		document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
+		document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", data['Poster']);
+	   }).then(
+	   		function(){
+				if (document.getElementById("img-"+/*[[${movie._id}]]*/+"").getAttribute("src")=='undefined') {
+			// Image not found or failed to load
+			document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", "https://unsplash.com/photos/tVkdGtEe2C4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8cXVlc3Rpb24lMjBtYXJrfGVufDB8fHx8MTY4MzExMzE5OQ&force=true&w=1920" );
+		  }	
+			});
+	  	
+ </script> 
+ <script>
+	const datUrl = "https://imdb-api.com/en/API/Reviews/k_qpexyd1w/tt" + document.getElementById("movieid").getAttribute("value"); 
+	fetch(datUrl).then(data=>{
+	return data.json()
+	}).then(res=>{
+		
+		for(let i = 0; i < 3; i++) {
+			let obj = res["items"][i];
+			document.getElementById("data").innerHTML += "<div class='review col-md-10 mx-auto mb-2'>"+obj.content+"</div></br>"
+			
+		}
+		
+		});
 	
- document.getElementById("img").style.background = 'url('+res["Poster"]+')';
-	
-});
-</script>
-
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+	</script> 
 </html>
-
