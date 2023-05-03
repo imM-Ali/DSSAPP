@@ -27,6 +27,14 @@
       href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
     />
     <style>
+        body{
+        background-image: url(https://unsplash.com/photos/8zD7rs8UpxU/download?force=true);
+        background-position:top;       
+        background-repeat: no-repeat;
+        background-size: cover;  
+        background-attachment: fixed;   
+        
+      }
 
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -44,8 +52,8 @@
       }
 	  
 	 
-		 .featurette-divider {
-		   margin: 5rem 0;
+		 .featurette {
+		   margin-bottom: 4rem;
 		  
 		 }	 
 		 
@@ -72,7 +80,7 @@
 	 
 		 @media (min-width: 62em) {
 		   .featurette-heading {
-			 margin-top: 5rem;
+			 margin-top: 2.5rem;
 		   }
 		 }
 		 .moviename{
@@ -89,6 +97,27 @@
   color: black;
   text-decoration: none;
 }
+.main{
+  opacity: 0.8;
+}
+
+.pagenav{
+  position: fixed; 
+  bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 10px;
+    
+}
+.nav-link{
+  color: white;
+}
+.nav-link:hover{
+  color:black;
+  background-color:#f8f9fa;
+}
+
 
     </style>
   </head>
@@ -139,8 +168,9 @@
       </nav>
       <div class="alert alert-primary"  role="alert"  th:text="${status}"  th:if="${status}" ></div>
 	
-		   <div class="row featurette pb-5" th:each="movie : ${movies}">
-			 <div class="col-md-7">	
+		   <div class="row featurette bg-light pb-5" th:each="movie : ${movies}">
+      
+			 <div class="col-md-7 pl-5 pt-5">	
 			   <h2 class="featurette-heading"><a class="moviename" th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}"></a></h2>
 			   
 			   <p class="lead" th:text="${movie.starring}"></p>
@@ -152,7 +182,7 @@
         <a th:href="@{|/editmovie/${movie._id}|}" class="btn btn-dark mx-auto mt-3">Edit</a>        
         <a class="btn btn-danger mx-auto mt-3" th:href="@{|/deletemovie/${movie._id}|}">Delete</a>
 			 </div>
-			 <div class="col-md-5  text-right">
+			 <div class="col-md-5 pr-5  text-right  pt-5">
 			   <img th:id="'img-' + ${movie._id}" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="250"
 				 height="300" xmlns="http://www.w3.org/2000/svg" focusable="false">				
 			 </img>
@@ -170,10 +200,10 @@
 			 </script>
 		   
 			 </div>
-			 <hr class="featurette-divider">
+    
 		   </div>
-	 
-		   <nav aria-label="Page navigation example">
+	 <div class="pagenav">
+		   <nav aria-label="Page navigation">
 			<ul class="pagination justify-content-center">
 			<li class="page-item"><a class="page-link" th:if="${currentPage < totalPages}" th:href="@{'/movies/' + ${1}}" >First</a></li>				
 			  <li class="page-item"><a class="page-link" th:if="${currentPage <= totalPages && currentPage>1}"	th:href="@{'/movies/' + ${currentPage - 1}}">Previous</a></li>
@@ -181,10 +211,7 @@
 			  <li class="page-item"> <a class="page-link"	th:if="${currentPage < totalPages}"	th:href="@{'/movies/' + ${totalPages}}"	>Last</a ></li>			
 			</ul>
 		  </nav>
-		 <footer class="container">
-		   <p class="float-right"><a href="#">Back to top</a></p>
-		   <p>&copy; CCT College, Dublin. &middot;</p>
-		 </footer>
+    </div>	
 	   
     </div>
   </body>  
