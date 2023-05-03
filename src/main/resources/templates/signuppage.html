@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CCT IMDB</title>
+    <title>Sign Up</title>
 
     <!-- Bootstrap core CSS -->
     <link
@@ -43,62 +43,68 @@
         }
       }
       
+      body{
+        background-image: url(https://unsplash.com/photos/8zD7rs8UpxU/download?force=true);
+        background-position: top;       
+        background-repeat: no-repeat;
+        background-size:cover;
+          
+      }
+      input{
+        height: 40px;
+      }
+      
     </style>
   </head>
   <body>
     <div class="container">
       <nav class="row navbar navbar-expand-sm">
-        <div class="col-4">
-          <div class="container-fluid">
+      
+        <div class="col-6">
+          <div class="container-fluid mx-auto">
             <img
               src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
             />            
           </div>
-        </div>        
+        </div> 
+            
       </nav>  
-      <div class="container">
-
-
-	  	<form class="w-50 mx-auto mt-5" th:action="@{/signup}" th:object="${user}" method="post">
-        <span><p th:if="${param.error}" class="form-text alert alert-danger">Invalid Credentials</p></span> 
-		<div th:if="${#fields.hasErrors('firstName') || #fields.hasErrors('lastName') || #fields.hasErrors('username') || #fields.hasErrors('email') || #fields.hasErrors('password')}" class="errorField">
-			<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
-			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
-			<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="email"></div>
-			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="password"></div>
-		  </div>
+  
+      <div class="container mb-5 w-75">
+        
+	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{/signup}" th:object="${user}" method="post">            
+        <div th:if="${#fields.hasErrors('firstName') || #fields.hasErrors('lastName') || #fields.hasErrors('username') || #fields.hasErrors('email') || #fields.hasErrors('password')}" class="form-text alert alert-danger text-center mx-auto errorField">
+          <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></br>
+          <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></br>
+          <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></br>
+          <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></br>
+          <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></br>
+          </div>
 				 
-        <div class="mb-3">
-          <label class="form-label">First Name</label>
-          <input type="text" id="firstname" name="firstname" th:field="*{firstName}" autocomplete="off" class="form-control form-control-sm">  
+        <div class="mb-3">         
+          <input type="text" id="firstname" placeholder="First Name" name="firstname" th:field="*{firstName}" autocomplete="off" class="form-control form-control-sm">  
         </div>
-		<div class="mb-3">
-			<label class="form-label">Last Name</label>
-			<input type="text" id="lastname" name="lastname" th:field="*{lastName}" autocomplete="off" class="form-control form-control-sm">  
+		<div class="mb-3">			
+			<input type="text" id="lastname" name="lastname" placeholder="Last Name" th:field="*{lastName}" autocomplete="off" class="form-control form-control-sm">  
 		  </div>
-		  <div class="mb-3">
-			<label class="form-label">User Name</label>
-			<input type="text" id="username" name="username" th:field="*{username}" autocomplete="off" class="form-control form-control-sm">  
+		  <div class="mb-3">			
+			<input type="text" id="username" name="username" placeholder="Username" th:field="*{username}" autocomplete="off" class="form-control form-control-sm">  
 		  </div>
-		  <div class="mb-3">
-			<label class="form-label">Email</label>
-			<input type="email" id="email" name="email" th:field="*{email}" autocomplete="off" class="form-control form-control-sm">  
+		  <div class="mb-3">			
+			<input type="email" id="email" name="email" placeholder="Email Address" th:field="*{email}" autocomplete="off" class="form-control form-control-sm">  
 		  </div>
         <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" id="password" name="password" th:field="*{password}" autocomplete="off" class="form-control form-control-sm" >                
+         
+          <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}" autocomplete="off" class="form-control form-control-sm" >                
         </div>
-		<input type="number" hidden id="role_id" name="role_id" th:field="*{role_id}" th:value="2" class="form-control form-control-sm">        
-        <button type="submit" class="btn btn-primary">Register</button>        
+        <div class="text-center">		      
+        <button type="submit" class="btn btn-primary">Register</button>  
+      </div>      
       </form>
 	 
-
-
-
     </div>    
 		  
-		 <footer class="container fixed-bottom">
+		 <footer class="container text-center fixed-bottom">
 			<hr class="featurette-divider">		  
 		   <p>&copy; CCT College, Dublin. &middot;</p>
 		 </footer>

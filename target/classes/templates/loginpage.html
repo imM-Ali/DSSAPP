@@ -42,6 +42,17 @@
           font-size: 3.5rem;
         }
       }
+      body{
+        background-image: url(https://unsplash.com/photos/8zD7rs8UpxU/download?force=true);
+        background-position:top;       
+        background-repeat: no-repeat;
+        background-size: cover;     
+        
+      }
+      input{
+        height: 40px;
+      }
+      
       
     </style>
   </head>
@@ -60,18 +71,18 @@
 	  	<form class="w-50 mx-auto mt-5" th:action="@{/login}" th:object="${user}" method="post">
         <span><p th:if="${param.error}" class="form-text alert alert-danger">Invalid Credentials</p></span>
         <span><p th:if="${param.logout}" class="form-text alert alert-danger">Logged out!</p></span>
-        <div class="mb-3">
-          <label class="form-label">Username</label>
+        <div class="mb-3">         
           <input type="text" name="username" placeholder="Username" autocomplete="off" th:field="*{username}" th:value="*{username}" class="form-control form-control-sm">
          
         </div>
-        <div class="mb-3">
-          <label class="form-label">Password</label>
-          <input type="password" name="password" placeholder="Password" autocomplete="off" th:field="*{password}" class="form-control form-control-sm" >          
+        <div class="mb-3">         
+          <input type="password" name="password" placeholder="Password" autocomplete="off" th:field="*{password}" class="form-control form-control-sm" >         
         
-        </div>        
+        </div>
+        <div class="text-center mx-auto">        
         <button type="submit" class="btn btn-primary">Log in</button>
-        <a class="btn btn-primary mx-auto" th:href="@{/signup}">Sign Up</a>
+        <a class="btn btn-primary" th:href="@{/signup}">Sign Up</a>
+      </div>
       </form>
       
     </div>    
@@ -84,22 +95,4 @@
     </div>
   </body>  
 </html>
-
-
-
-<!--
-<div ">
-			Invalid username and password.</div>
-		<div th:if="${param.logout}">
-			You have been logged out.</div>
-		<form >
-			<div>
-			<input />
-			</div>
-			<div>
-			<input />
-			</div>
-			
-		</form>
-		<p class="text-center">Not a member?</p>  
-asdsad-->		
+	
