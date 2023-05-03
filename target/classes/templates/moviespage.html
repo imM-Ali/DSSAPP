@@ -172,15 +172,14 @@
           </div>
         </div>
       </nav>
-      <div class="alert alert-primary"  role="alert"  th:text="${status}"  th:if="${status}" ></div>
-	
+      <div class="alert alert-primary"  role="alert"  th:text="${status}"  th:if="${status}" ></div>      
 		   <div class="row featurette bg-light pb-5" th:each="movie : ${movies}">
       
 			 <div class="col-md-7 pl-5 pt-5">	
 			   <h2 class="featurette-heading"><a class="moviename" th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}"></a></h2>
-			   
+			   <span th:id="'imdb-' + ${movie.imdbId}" th:if="${movie.imdbId=='0'}"></span>         
 			   <p class="lead" th:text="${movie.starring}"></p>
-				 <p class="Desc" th:id="'movie-' + ${movie._id}"></p>      
+				 <p class="Desc" th:id="'movie-' + ${movie._id}" th:text="${movie.txt}"></p>      
         <label>Directed By:</label>
         <span th:text="${movie.directedBy}"></span></br>
         <label>Rating:</label>
@@ -193,15 +192,23 @@
 				 height="300" xmlns="http://www.w3.org/2000/svg" focusable="false">				
 			 </img>
 			 <script th:inline="javascript">
+       
 				var link ='http://www.omdbapi.com/?i=tt'+/*[[${movie.imdbId}]]*/
 				
 				 fetch(link+"&apikey=6bd9464c")
 				   .then(function (response) {
 					 return response.json();
 				   })
-				   .then(function (data) {						
-					document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
+				   .then(function (data) {	
+            if(document.getElementById("imdb-"+/*[[${movie.imdbId}]]*/+"")!=null){
+              document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", "https://unsplash.com/photos/tVkdGtEe2C4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8cXVlc3Rpb24lMjBtYXJrfGVufDB8fHx8MTY4MzExMzE5OQ&force=true&w=1920");
+            }else{
+              document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
+          
 					document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", data['Poster']);
+            }
+					
+         
 				   });
 			 </script>
 		   

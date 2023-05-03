@@ -25,6 +25,7 @@ public class MovieServiceImpl implements MovieService {
 		try {
 			maxId();
 			movie.set_id(maxid + 1);
+			movie.setImdbId("0");
 			_db.save(movie);
 			return true;
 		} catch (Exception e) {
