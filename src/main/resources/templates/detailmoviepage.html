@@ -178,7 +178,7 @@
 			<div class="col-md-10 mx-auto pt-5">
 				<h2 class="featurette-heading" th:text="${movie.title}"></h2>			   
 				<p class="lead" th:text="${movie.starring}"></p>
-				<p class="Desc" th:id="'movie-' + ${movie._id}"></p>      
+				<p class="Desc" th:id="'movie-' + ${movie._id}" th:text="${movie.txt}"></p>      
         		<label>Directed By:</label>
         		<span th:text="${movie.directedBy}"></span></br>
         		<label>Rating:</label>
@@ -199,27 +199,27 @@
 	   
     </div>
   </body>
+
   <script th:inline="javascript">
-	var link ='http://www.omdbapi.com/?i=tt'+/*[[${movie.imdbId}]]*/
+    var imdbId = /*[[${movie.imdbId}]]*/;
+    if(imdbId=="0"){
+      document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", "https://unsplash.com/photos/tVkdGtEe2C4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8cXVlc3Rpb24lMjBtYXJrfGVufDB8fHx8MTY4MzExMzE5OQ&force=true&w=1920" );
+      document.getElementById("data").innerHTML = "<div class='form-text alert alert-danger text-center mx-auto errorField'><span>This movie has not been registered on the real world IMDB database</span></div>";
+      
+     
+    }else{
+      var link ='http://www.omdbapi.com/?i=tt'+/*[[${movie.imdbId}]]*/
 	
-	 fetch(link+"&apikey=6bd9464c")
-	   .then(function (response) {
-		 return response.json();
-	   })
-	   .then(function (data) {						
-		document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
-		document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", data['Poster']);
-	   }).then(
-	   		function(){
-				if (document.getElementById("img-"+/*[[${movie._id}]]*/+"").getAttribute("src")=='undefined') {
-			// Image not found or failed to load
-			document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", "https://unsplash.com/photos/tVkdGtEe2C4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8cXVlc3Rpb24lMjBtYXJrfGVufDB8fHx8MTY4MzExMzE5OQ&force=true&w=1920" );
-		  }	
-			});
-	  	
- </script> 
- <script>
-	const datUrl = "https://imdb-api.com/en/API/Reviews/k_qpexyd1w/tt" + document.getElementById("movieid").getAttribute("value"); 
+  fetch(link+"&apikey=6bd9464c")
+    .then(function (response) {
+    return response.json();
+    })
+    .then(function (data) {						
+   document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
+   document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", data['Poster']);
+    });
+    
+    const datUrl = "https://imdb-api.com/en/API/Reviews/k_qpexyd1w/tt" + document.getElementById("movieid").getAttribute("value"); 
 	fetch(datUrl).then(data=>{
 	return data.json()
 	}).then(res=>{
@@ -232,5 +232,9 @@
 		
 		});
 	
-	</script> 
+
+    }
+	
+ </script> 
+
 </html>

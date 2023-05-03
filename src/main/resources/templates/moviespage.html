@@ -201,7 +201,7 @@
 				   })
 				   .then(function (data) {	
             if(document.getElementById("imdb-"+/*[[${movie.imdbId}]]*/+"")!=null){
-              
+              document.getElementById("img-"+/*[[${movie._id}]]*/+"").setAttribute("src", "https://unsplash.com/photos/tVkdGtEe2C4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8M3x8cXVlc3Rpb24lMjBtYXJrfGVufDB8fHx8MTY4MzExMzE5OQ&force=true&w=1920");
             }else{
               document.getElementById("movie-"+/*[[${movie._id}]]*/+"").innerText = data['Plot'];
           
