@@ -54,12 +54,6 @@ public class RoleController {
 
 	}
 
-	@GetMapping("/viewroledetails/{id}")
-	public String viewRoleDetails(@PathVariable("id") int id, Model model) {
-		model.addAttribute("role", roleService.getRoleById(id).get());
-		return "roledetailpage";
-
-	}
 
 	@GetMapping("/editRole/{id}")
 	public String editRole(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {
