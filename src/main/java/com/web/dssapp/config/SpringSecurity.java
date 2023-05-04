@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
 
 @Configuration
 @EnableWebSecurity
@@ -41,8 +43,7 @@ public class SpringSecurity {
 		 
 	        http.authorizeHttpRequests((authz) -> {
 	            try {
-	                authz.requestMatchers("/signup","/login").permitAll()
-	                .requestMatchers("/style/").permitAll()
+	                authz.requestMatchers("/signup","/login","/resources/**").permitAll()
 	                .requestMatchers("/roles").hasAuthority("admin")
 	                .requestMatchers("users/**").hasAuthority("admin")
 					.requestMatchers("/editmovie/**").hasAuthority("admin")
