@@ -44,7 +44,7 @@ public class SpringSecurity {
 	                authz.requestMatchers("/signup","/login").permitAll()
 	                .requestMatchers("/roles").hasAuthority("admin")
 	                .requestMatchers("users/**").hasAuthority("admin")
-					.requestMatchers("/editmovie/**").hasAnyAuthority("admin")
+					.requestMatchers("/editmovie/**").hasAuthority("admin")
 					.requestMatchers("/deletemovie/**").hasAuthority("admin")
 					.requestMatchers("/users/**").hasAuthority("admin")
 					.requestMatchers("roles").hasAuthority("admin")
