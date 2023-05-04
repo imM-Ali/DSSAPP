@@ -24,20 +24,27 @@ public class UserController {
 	private UserService userService;
 
 
-	@GetMapping("/edituser/{id}")
-	public String editUser(@PathVariable("id") int id, Model model, RedirectAttributes redirAttrs) {
+	@GetMapping("/edituser/{admin}&{id}")
+	public String editUser(@PathVariable("id") int id,@PathVariable("admin") int admin, Model model, RedirectAttributes redirAttrs) {
 		Optional<User> oldUser = userService.findUserById(id);
-		if (oldUser != null) {
+		if(oldUser != null){
+			if(admin==1){
 			model.addAttribute("user", oldUser.get());
-			return "edituserpage";
-		} else {
+			return "adminedituserpage";
+			}else{
+				model.addAttribute("user", oldUser.get());
+				return "edituserpage";
+			}
+
+		}else {
 			redirAttrs.addFlashAttribute("status", "Something went wrong");
 			return "redirect:/edituser";
 		}
+		
 	}
 
-	@PostMapping("/edituser/{id}")
-	public String saveEditedUser(@PathVariable("id") int id, @ModelAttribute("user") @Valid UserDto userDTO,
+	@PostMapping("/edituser/{admin}&{id}")
+	public String saveEditedUser(@PathVariable("id") int id,@PathVariable("admin") int admin, @ModelAttribute("user") @Valid UserDto userDTO,
 			BindingResult res, RedirectAttributes attr) {
 		userDTO.set_id(id);
 		Optional<User> oldUser = userService.findUserById(id);
@@ -52,8 +59,14 @@ public class UserController {
 				userDTO.setPassword(existingUser.getPassword());
 			}
 			userService.updateUser(existingUser, userDTO);
-			attr.addFlashAttribute("status", "Saved successfully, will reflect on your next login");
-			return "redirect:/viewuserdetails/" + id;
+			attr.addFlashAttribute("status", "Saved successfully, will reflect on next login");
+			if(admin==1){
+				return "redirect:/users/1";
+			}else{
+				return "redirect:/viewuserdetails/" + id;
+			}
+			
+			
 		}
 		// if there are errors and the previous 2 conditions were not met, then return
 		// the view with error fields now showing

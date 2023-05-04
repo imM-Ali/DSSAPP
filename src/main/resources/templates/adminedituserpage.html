@@ -112,7 +112,7 @@
   
       <div class="container mb-5 w-75">
         
-	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{|/edituser/${user._id}|}" th:object="${user}" method="post">            
+	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{|/edituser/1&${user._id}|}" th:object="${user}" method="post">            
         <div th:if="${#fields.hasErrors('firstName') || #fields.hasErrors('lastName') || #fields.hasErrors('username') || #fields.hasErrors('email') || #fields.hasErrors('password')}" class="form-text alert alert-danger text-center mx-auto errorField">
           <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></br>
           <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></br>
