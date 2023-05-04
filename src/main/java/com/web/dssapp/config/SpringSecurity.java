@@ -42,6 +42,7 @@ public class SpringSecurity {
 	        http.authorizeHttpRequests((authz) -> {
 	            try {
 	                authz.requestMatchers("/signup","/login").permitAll()
+	                .requestMatchers("/style/").permitAll()
 	                .requestMatchers("/roles").hasAuthority("admin")
 	                .requestMatchers("users/**").hasAuthority("admin")
 					.requestMatchers("/editmovie/**").hasAuthority("admin")

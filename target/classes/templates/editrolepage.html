@@ -1,27 +1,106 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Edit Role</title>
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-</head>
-<body>
-    <h1>Edit Role</h1>
-    <form th:action="@{|/editRole/${role._id}|}" th:object="${role}" method="post">
-        <input type="hidden" th:field="*{_id}">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" th:field="*{name}" required><br>
-        <br>
-        <button type="submit">Save Changes</button>
-    </form>
-</body>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manage Roles</title>
+
+    <!-- Bootstrap core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="canonical"
+      href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
+    />
+    <link rel="stylesheet" href="../templates/style/styles.css">
+  </head>
+  <body>
+    <div class="container">
+		<nav class="row navbar navbar-expand-sm">
+			<div class="col-4">
+			  <div class="container-fluid">
+				<img
+				  src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
+				/>
+				<button
+				  class="navbar-toggler"
+				  type="button"
+				  data-toggle="collapse"
+				  data-target="#navbarCollapse"
+				  aria-controls="navbarCollapse"
+				  aria-expanded="false"
+				  aria-label="Toggle navigation"
+				>
+				  <span class="navbar-toggler-icon"></span>
+				</button>
+			  </div>
+			</div>
+			<div class="col-8">
+			  <div
+				class="collapse navbar-collapse justify-content-end"
+				id="navbarCollapse"
+			  >
+				<ul class="navbar-nav">   
+				<li class="nav-item">
+    <a class="nav-link btn" th:href="@{/movies/1}">Home</a>
+</li>          
+				  <li class="nav-item active">
+					<a
+					  class="nav-link btn"                 
+					  th:href="@{|/viewuserdetails/${currentuser._id}|}"
+					>View Profile</a>
+				  </li>
+				  <li class="nav-item">
+					<a class="nav-link btn" th:href="@{/admin}">Admin Panel</a>
+				  </li>
+				  <li class="nav-item">
+					<form name="logoutform" th:action="@{/logout}" method="post">
+					  <button type="submit" class="nav-link btn">Log out</button>
+					</form>
+				  </li>
+				</ul>
+			  </div>
+			</div>
+		  </nav>     
+  
+      <div class="container mb-5 w-75">
+        <div class="alert alert-primary mx-auto" role="alert" th:text="${status}"
+		th:if="${status}"></div>
+	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{|/editRole/${role._id}|}" th:object="${role}" method="post">            
+        <div th:if="${#fields.hasErrors('name')}" class="form-text alert alert-danger text-center mx-auto errorField">         
+          <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></br>         
+          </div>
+				 
+        <div class="mb-3">  
+        <input type="hidden" th:field="*{_id}"> 
+		<label>Name:</label>       
+          <input type="text" id="name" th:field="*{name}" autocomplete="off" class="form-control form-control-sm">  
+        </div>		
+        <div class="text-center">		      
+        <button type="submit" class="btn btn-primary">Save Role</button>  
+      </div>      
+      </form>
+	 
+    </div> 
+		 <footer class="container text-center">			  
+		   <p>&copy; CCT College, Dublin. &middot;</p>
+		 </footer>
+	   
+    </div>
+  </body>  
 </html>
