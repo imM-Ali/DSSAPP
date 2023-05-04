@@ -29,14 +29,10 @@
   </head>
   <style>
   body{
-    background-image: url(https://unsplash.com/photos/8zD7rs8UpxU/download?force=true);
-    background-position:top;       
-    background-repeat: no-repeat;
-    background-size: cover;  
-    background-attachment: fixed;   
-    
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(176,229,208,1) 42%, rgba(92,202,238,0.41) 93.6% );
+    background-attachment: fixed;
   }
-
+ 
   input{
     height: 40px;
   }
@@ -56,11 +52,24 @@ color: white;
 color:black;
 background-color:#f8f9fa;
 }
+.section {
+  width: 50%;
+  padding: 20px 10px; 
+  background-color: #f5f5f5;
+  box-shadow: 3px 15px 14px rgba(0, 0, 0, 0.1); 
+  background-image: url(https://img.freepik.com/premium-vector/hand-drawn-cute-doodle-illustration-design_90573-625.jpg?w=1060);
+  background-blend-mode:lighten;
+}
+.action{
+color: black;
+}
+.action:hover{
+color: white!important;
+}
   
   </style>
-  <body>
-    <div class="container">
-      <nav class="row navbar navbar-expand-sm">
+  <body>    
+      <nav class="navbar navbar-expand-sm">
         <div class="col-4">
           <div class="container-fluid">
             <img
@@ -69,8 +78,8 @@ background-color:#f8f9fa;
           </div>
         </div>        
       </nav>  
-      <div class="container">
-	  	<form class="w-50 mx-auto mt-5" th:action="@{/login}" th:object="${user}" method="post">
+      <div class="container section w-50">
+	  	<form class="w-50 mx-auto my-auto mt-5" th:action="@{/login}" th:object="${user}" method="post">
         <span><p th:if="${param.error}" class="form-text alert alert-danger">Invalid Credentials</p></span>
         <span><p th:if="${param.logout}" class="form-text alert alert-danger">Logged out!</p></span>
         <div class="mb-3">         
@@ -82,19 +91,17 @@ background-color:#f8f9fa;
         
         </div>
         <div class="text-center mx-auto">        
-        <button type="submit" class="btn btn-primary">Log in</button>
-        <a class="btn btn-primary" th:href="@{/signup}">Sign Up</a>
+        <button type="submit" class="btn action btn-outline-dark">Log in</button>
+        <a class="btn btn-outline-dark action" th:href="@{/signup}">Sign Up</a>
       </div>
       </form>
       
     </div>    
 		  
-		 <footer class="container fixed-bottom">
+		 <footer class="fixed-bottom px-5">
 			<hr class="featurette-divider">		  
 		   <p>&copy; CCT College, Dublin. &middot;</p>
 		 </footer>
-	   
-    </div>
   </body>  
 </html>
 	

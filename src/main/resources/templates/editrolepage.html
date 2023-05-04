@@ -29,9 +29,8 @@
     />
      <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}" />
   </head>
-  <body>
-    <div class="container">
-		<nav class="row navbar navbar-expand-sm">
+  <body>    
+		<nav class="navbar navbar-expand-sm">
 			<div class="col-4">
 			  <div class="container-fluid">
 				<img
@@ -57,20 +56,20 @@
 			  >
 				<ul class="navbar-nav">   
 				<li class="nav-item">
-    <a class="nav-link btn" th:href="@{/movies/1}">Home</a>
+    <a class="action btn" th:href="@{/movies/1}">Home</a>
 </li>          
 				  <li class="nav-item active">
 					<a
-					  class="nav-link btn"                 
+					  class="action btn"                 
 					  th:href="@{|/viewuserdetails/${currentuser._id}|}"
 					>View Profile</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link btn" th:href="@{/admin}">Admin Panel</a>
+					<a class="action btn" th:href="@{/admin}">Admin Panel</a>
 				  </li>
 				  <li class="nav-item">
 					<form name="logoutform" th:action="@{/logout}" method="post">
-					  <button type="submit" class="nav-link btn">Log out</button>
+					  <button type="submit" class="action btn">Log out</button>
 					</form>
 				  </li>
 				</ul>
@@ -78,7 +77,7 @@
 			</div>
 		  </nav>     
   
-      <div class="container mb-5 w-75">
+      <div class="container mb-5 w-75 section">
         <div class="alert alert-primary mx-auto" role="alert" th:text="${status}"
 		th:if="${status}"></div>
 	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{|/editRole/${role._id}|}" th:object="${role}" method="post">            
@@ -92,7 +91,7 @@
           <input type="text" id="name" th:field="*{name}" autocomplete="off" class="form-control form-control-sm">  
         </div>		
         <div class="text-center">		      
-        <button type="submit" class="btn btn-primary">Save Role</button>  
+        <button type="submit" class="btn btn-outline-dark">Save Role</button>  
       </div>      
       </form>
 	 
@@ -101,6 +100,6 @@
 		   <p>&copy; CCT College, Dublin. &middot;</p>
 		 </footer>
 	   
-    </div>
+   
   </body>  
 </html>
