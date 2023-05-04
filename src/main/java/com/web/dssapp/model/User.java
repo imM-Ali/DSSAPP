@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 @Getter
 @Setter
@@ -20,15 +22,20 @@ public class User
     @Id
     private int _id;
     @NotBlank(message = "First Name should not be empty")
+	@Size(min = 3, max = 15, message = "Incorrect length for First Name")
     private String firstName;
     @NotBlank(message = "Last name should not be empty")
+	@Size(min = 3, max = 15, message = "Incorrect length for Last Name")
     private String lastName;
     @NotBlank(message = "Username should not be empty")
+	@Size(min = 5, max = 25, message = "Incorrect length for User Name")
     private String username;
     @NotBlank(message = "Email should not be empty")
     @Email
     private String email;   
     @NotBlank(message = "Password should not be empty")
+	@Size(min = 8, max = 99, message = "Password must be minimum 8 characters")
+	@Pattern(regexp = "^((?=\\S*?[A-Z])(?=\\S*?[a-z])(?=\\S*?[0-9]).{6,})\\S$", message = "Password must contain atleast 1 number, atleast 1 upper case character and atleast 1 special character")
     private String password;
     private int role_id;
 
