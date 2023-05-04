@@ -26,63 +26,73 @@
       rel="canonical"
       href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
     />
+    <style>
+      body{       
+        background-image: url(https://wallpaperset.com/w/full/6/d/3/366121.jpg);
+        background-attachment: fixed;
+        backdrop-filter: blur(3px); 
+        height: 100vh;       
+        display: flex;
+      }
+     
+      input{
+        height: 40px;
+      }
+      .pagenav{
+    position: fixed; 
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 10px;
+    
+    }
+    .nav-link{
+    color: white;
+    }
+    .nav-link:hover{
+    color:black;
+    background-color:#f8f9fa;
+    }
+    .section {   
+     
+      padding: 20px 10px; 
+      background-color: #f5f5f5;
+      box-shadow: 3px 15px 14px rgba(0, 0, 0, 0.1); 
+      background-image: url(https://img.freepik.com/premium-vector/hand-drawn-cute-doodle-illustration-design_90573-625.jpg?w=1060);
+      background-blend-mode:lighten; 
+      align-self: center;
+      
+    }
+    .action{
+    background-color: black;
+    color: oldlace;
+    }
+    .action:hover{
+    color: black!important;
+    background-color: transparent;
+    border: 1px solid black;
+    }
+    .blur{     
+      color: black;
+    }
+      
+      </style>
   </head>
-  <style>
-  body{
-    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(176,229,208,1) 42%, rgba(92,202,238,0.41) 93.6% );
-    background-attachment: fixed;
-  }
  
-  input{
-    height: 40px;
-  }
-  .pagenav{
-position: fixed; 
-bottom: 0px;
-left: 0;
-right: 0;
-z-index: 9999;
-padding: 10px;
-
-}
-.nav-link{
-color: white;
-}
-.nav-link:hover{
-color:black;
-background-color:#f8f9fa;
-}
-.section {
-  width: 50%;
-  padding: 20px 10px; 
-  background-color: #f5f5f5;
-  box-shadow: 3px 15px 14px rgba(0, 0, 0, 0.1); 
-  background-image: url(https://img.freepik.com/premium-vector/hand-drawn-cute-doodle-illustration-design_90573-625.jpg?w=1060);
-  background-blend-mode:lighten;
-}
-.action{
-color: black;
-}
-.action:hover{
-color: white!important;
-}
-  
-  </style>
-  <body>    
-      <nav class="navbar navbar-expand-sm">
-        <div class="col-4">
-          <div class="container-fluid">
+  <body>          
+      <div class="container section w-50">
+        <div class="d-none d-sm-block">
+          <div class="container-fluid text-center">
             <img
               src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
             />            
           </div>
-        </div>        
-      </nav>  
-      <div class="container section w-50">
-	  	<form class="w-50 mx-auto my-auto mt-5" th:action="@{/login}" th:object="${user}" method="post">
+        </div>
+	  	<form  class="w-50 mx-auto my-auto mt-5 pb-2" th:action="@{/login}" th:object="${user}" method="post">
         <span><p th:if="${param.error}" class="form-text alert alert-danger">Invalid Credentials</p></span>
         <span><p th:if="${param.logout}" class="form-text alert alert-danger">Logged out!</p></span>
-        <div class="mb-3">         
+        <div class="mb-3 my-auto">         
           <input type="text" name="username" placeholder="Username" autocomplete="off" th:field="*{username}" th:value="*{username}" class="form-control form-control-sm">
          
         </div>
@@ -91,17 +101,11 @@ color: white!important;
         
         </div>
         <div class="text-center mx-auto">        
-        <button type="submit" class="btn action btn-outline-dark">Log in</button>
-        <a class="btn btn-outline-dark action" th:href="@{/signup}">Sign Up</a>
+        <button type="submit" class="btn action">Log in</button>
+        <a class="btn action" th:href="@{/signup}">Sign Up</a>
       </div>
-      </form>
-      
-    </div>    
-		  
-		 <footer class="fixed-bottom px-5">
-			<hr class="featurette-divider">		  
-		   <p>&copy; CCT College, Dublin. &middot;</p>
-		 </footer>
+      </form>     
+    </div>  
   </body>  
 </html>
 	
