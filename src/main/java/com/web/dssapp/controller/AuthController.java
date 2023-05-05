@@ -6,6 +6,9 @@ import com.web.dssapp.service.UserService;
 import org.springframework.ui.Model;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +23,15 @@ public class AuthController {
 
 	@GetMapping("/login")
 	public String loginForm(Model model) {
-		model.addAttribute("user", new UserDto());
-		return "loginpage";
-	}
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+			model.addAttribute("user",new UserDto());
+			return"loginpage";
+		}
+
+		return "redirect:/";
+	}	
 
 	// handler method to handle user registration request
 
@@ -37,23 +46,22 @@ public class AuthController {
 
 	@PostMapping("/signup")
 	public String registration(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
-		//by default, a new user has 'user' privilege
+		// by default, a new user has 'user' privilege
 		user.setRole_id(2);
 		if (result.hasErrors()) {
 			return "signuppage";
-		} 
-		
+		}
+
 		User existing = userService.findByEmail(user.getEmail());
 		if (existing != null) {
 			result.rejectValue("email", null, "There is already an account registered with that email");
 			return "signuppage";
 		}
 		// checks if there is any field is invalid
-		
-			userService.saveUser(user);
-			model.addAttribute("user", user);
-							
-		
+
+		userService.saveUser(user);
+		model.addAttribute("user", user);
+
 		return "redirect:/login";
 	}
 
