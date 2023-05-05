@@ -30,8 +30,8 @@
      <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}" />
   </head>
   <body>
-    <div class="container">
-		<nav class="row navbar navbar-expand-sm">
+   
+		<nav class="navbar navbar-expand-sm">
 			<div class="col-4">
 			  <div class="container-fluid">
 				<img
@@ -57,29 +57,28 @@
 			  >
 				<ul class="navbar-nav">	
 				<li class="nav-item">
-                <a class="nav-link btn" th:href="@{/movies/1}">Home</a>
+                <a class="action btn" th:href="@{/movies/1}">Home</a>
               </li>			 
 				  <li class="nav-item active">
 					<a
-					  class="nav-link btn"                 
+					  class="action btn"                 
 					  th:href="@{|/viewuserdetails/${currentuser._id}|}"
 					>View Profile</a>
 				  </li>
 				  <li class="nav-item">
-					<a class="nav-link btn" th:href="@{/admin}">Admin Panel</a>
+					<a class="action btn" th:href="@{/admin}">Admin Panel</a>
 				  </li>
 				  <li class="nav-item">
 					<form name="logoutform" th:action="@{/logout}" method="post">
-					  <button type="submit" class="nav-link btn">Log out</button>
+					  <button type="submit" class="action btn">Log out</button>
 					</form>
 				  </li>
 				</ul>
 			  </div>
 			</div>
 		  </nav>
-  
-      <div class="container mb-5 w-75">
-        
+   <div class="container section my-2 w-75">
+     
 	  	<form class="w-50 mx-auto my-auto py-3" th:action="@{/addMovie}" th:object="${movie}" method="post">            
         <div th:if="${#fields.hasErrors('title') || #fields.hasErrors('starring')}" class="form-text alert alert-danger text-center mx-auto errorField">
           <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span></br>
@@ -103,11 +102,11 @@
           <textarea type="text" id="txt" name="txt" placeholder="Description" rows="4" cols="50"  th:field="*{txt}" autocomplete="off" class="form-control form-control-sm" ></textarea>             
         </div>
         <div class="text-center">		      
-        <button type="submit" class="btn btn-primary">Submit</button>  
+        <button type="submit" class="btn action btn-outline-dark">Submit</button>  
       </div>      
       </form>
 	 
-    </div>    
+       
 		  
 		 <footer class="container text-center fixed-bottom">
 			<hr class="featurette-divider">		  
