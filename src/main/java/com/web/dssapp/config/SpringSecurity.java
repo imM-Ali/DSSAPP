@@ -44,12 +44,11 @@ public class SpringSecurity {
 	        http.authorizeHttpRequests((authz) -> {
 	            try {
                     authz.requestMatchers("/signup", "/login", "/resources/**").permitAll()
-                            .requestMatchers("/roles").hasAnyAuthority("admin", "manager")
-                            .requestMatchers("users/**").hasAnyAuthority("admin", "manager")
-                            .requestMatchers("/editmovie/**").hasAnyAuthority("admin", "manager","editor")
+                            .requestMatchers("/roles").hasAnyAuthority("admin")
+                            .requestMatchers("users/**").hasAnyAuthority("admin", "Manager")
+                            .requestMatchers("/editmovie/**").hasAnyAuthority("admin", "Manager","editor")
                             .requestMatchers("/deletemovie/**").hasAuthority("admin")
-                            .requestMatchers("/edituser/**").hasAnyAuthority("admin", "manager")
-                            .requestMatchers("roles").hasAnyAuthority("admin", "manager")
+                            .requestMatchers("/edituser/**").hasAnyAuthority("admin", "Manager")                            
                             .anyRequest().authenticated()
                             .and().exceptionHandling(handling -> handling.accessDeniedPage("/noaccess"))
                             .formLogin(login -> login
