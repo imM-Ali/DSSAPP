@@ -29,53 +29,55 @@
      <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}" />
   </head>
   <body>    
-      <nav class="navbar navbar-expand-sm">
-        <div class="col-4">
-          <div class="container-fluid">
-            <img
-              src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
-            />
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </div>
-        <div class="col-8">
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarCollapse"
-          >
-            <ul class="navbar-nav">      
+    <nav class="site-header sticky-top py-1">
+      <div class="d-flex justify-content-between">
+        <a class="py-2" th:href="@{/movies/1}">              
+          <img src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"/>               
+        </a>
+        <div id="navbarHeader" >
+          <button class="btn btn-dark d-flex d-sm-none d-md-none" style="margin: 2em 1em;" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span>Menu</span>
+          </button> 
+          <ul class="navbar-nav d-none d-sm-flex" style="margin: 3em 5em;"> 
+          <li class="nav-item">
+            <a class="action btn" th:href="@{/movies/1}">Home</a>
+            </li>	 
             <li class="nav-item">
-    <a class="action btn" th:href="@{/movies/1}">Home</a>
-</li>       
-              <li class="nav-item active">
-                <a
-                  class="action btn"                 
-                  th:href="@{|/viewuserdetails/${currentuser._id}|}"
-                >View Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="action btn" th:href="@{/admin}">Admin Panel</a>
-              </li>
-              <li class="nav-item">
-                <form name="logoutform" th:action="@{/logout}" method="post">
-                  <button type="submit" class="action btn">Log out</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>     
-	
+              <a class="btn action" th:href="@{|/viewuserdetails/${currentuser._id}|}">View Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn action" th:href="@{/admin}">Admin Panel</a>
+            </li>
+            <li class="nav-item">
+              <form name="logoutform" th:action="@{/logout}" method="post">
+                <button type="submit" class="btn action">Log out</button>
+              </form>
+            </li>     
+          </ul> 
+         
+        </div>     
+         
+      </div>
+      <ul class="navbar-nav collapse d-md-none ml-auto justify-content-center py-2" id="navbarCollapse">            
+        <li class="nav-item">
+                  <a class="action btn" th:href="@{/movies/1}">Home</a>
+                </li>		
+        <li class="nav-item">
+          <a class="btn action" th:href="@{|/viewuserdetails/${currentuser._id}|}">View Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="btn action" th:href="@{/admin}">Admin Panel</a>
+        </li>
+        <li class="nav-item">
+          <form name="logoutform" th:action="@{/logout}" method="post">
+            <button type="submit" class="btn action">Log out</button>
+          </form>
+        </li>     
+      </ul> 
+    </nav>
+    
+     
 	<div class="featurette bg-light pb-5">
 		
 			<div class="col-md-12  text-center  pt-5">

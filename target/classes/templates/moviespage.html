@@ -1,86 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
     <title>CCT IMDB</title>
-	<!-- Bootstrap core CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
-      integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
-      integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      rel="canonical"
-      href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
-    />
-    <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}" />
-  </head>
-  <body>
-   
-      <nav class="navbar navbar-expand-sm">
-        <div class="col-4">
-          <div class="container-fluid">
-            <img
-              src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
-            />
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarCollapse"
-              aria-controls="navbarCollapse"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </div>
-        <div class="col-8">
-          <div
-            class="collapse navbar-collapse justify-content-end"
-            id="navbarCollapse"
-          >
-            <ul class="navbar-nav">            
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+        integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}"/>
+
+</head>
+
+<body>
+  <nav class="site-header sticky-top py-1">
+    <div class="d-flex justify-content-between">
+        <a class="py-2" th:href="@{/movies/1}">              
+            <img src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"/>               
+        </a>
+        <div id="navbarHeader" >
+          <button class="btn btn-dark d-flex d-sm-none d-md-none" style="margin: 2em 1em;" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+          aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span>Menu</span>
+          </button> 
+          <ul class="navbar-nav d-none d-sm-flex" style="margin: 3em 5em;">            
               <li class="nav-item active">
-                <a
-                  class="btn action"                 
-                  th:href="@{/addMovie}"
-                >Add Movie</a>
+                  <a class="btn action" th:href="@{/addMovie}">Add Movie</a>
               </li>
               <li class="nav-item active">
-                <a
-                  class="btn action"                 
-                  th:href="@{|/viewuserdetails/${currentuser._id}|}"
-                >View Profile</a>
+                  <a class="btn action" th:href="@{|/viewuserdetails/${currentuser._id}|}">View Profile</a>
               </li>
               <li class="nav-item">
-                <a class="btn action" th:href="@{/admin}">Admin Panel</a>
+                  <a class="btn action" th:href="@{/admin}">Admin Panel</a>
               </li>
               <li class="nav-item">
-                <form name="logoutform" th:action="@{/logout}" method="post">
-                  <button type="submit" class="btn action">Log out</button>
-                </form>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <div class="container">
-      <div class="alert alert-primary"  role="alert"  th:text="${status}"  th:if="${status}" ></div>      
-		   <div class="row featurette section pb-5" th:each="movie : ${movies}">
+                  <form name="logoutform" th:action="@{/logout}" method="post">
+                      <button type="submit" class="btn action">Log out</button>
+                  </form>
+              </li>     
+          </ul> 
+         
+      </div>     
+       
+    </div>
+    <ul class="navbar-nav collapse d-md-none ml-auto justify-content-center py-2" id="navbarCollapse">            
+      <li class="nav-item">
+          <a class="btn action" th:href="@{/addMovie}">Add Movie</a>
+      </li>
+      <li class="nav-item">
+          <a class="btn action" th:href="@{|/viewuserdetails/${currentuser._id}|}">View Profile</a>
+      </li>
+      <li class="nav-item">
+          <a class="btn action" th:href="@{/admin}">Admin Panel</a>
+      </li>
+      <li class="nav-item">
+          <form name="logoutform" th:action="@{/logout}" method="post">
+              <button type="submit" class="btn action">Log out</button>
+          </form>
+      </li>     
+  </ul> 
+</nav>
+
+
+    <div class="container">
+      <div class="alert alert-primary mt-4"  role="alert"  th:text="${status}"  th:if="${status}" ></div>      
+		   <div class="row featurette mt-3 section pb-5" th:each="movie : ${movies}">
       
 			 <div class="col-md-7 pl-5 pt-5">	
 			   <h2 class="featurette-heading"><a class="moviename" th:href="@{|/movieDetail/${movie._id}|}" th:text="${movie.title}"></a></h2>
@@ -134,5 +123,5 @@
     </div>	
 	   
     </div>
-  </body>  
+</body>
 </html>

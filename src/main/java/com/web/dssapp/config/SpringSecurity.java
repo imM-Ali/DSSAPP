@@ -43,21 +43,21 @@ public class SpringSecurity {
 		 
 	        http.authorizeHttpRequests((authz) -> {
 	            try {
-	                authz.requestMatchers("/signup","/login","/resources/**").permitAll()
-	                .requestMatchers("/roles").hasAuthority("admin")
-	                .requestMatchers("users/**").hasAuthority("admin")
-					.requestMatchers("/editmovie/**").hasAuthority("admin")
-					.requestMatchers("/deletemovie/**").hasAuthority("admin")
-					.requestMatchers("/users/**").hasAuthority("admin")
-					.requestMatchers("roles").hasAuthority("admin")
-	                    .anyRequest().authenticated()
-	                    .and().exceptionHandling().accessDeniedPage("/noaccess").and()	                    
-	                    .formLogin(login -> login
-	                        .loginPage("/login")
-	                        .defaultSuccessUrl("/movies/1", true))
-	                    .logout(logout -> logout
-	                    		 .invalidateHttpSession(true)) 
-	                    .httpBasic(withDefaults());
+                    authz.requestMatchers("/signup", "/login", "/resources/**").permitAll()
+                            .requestMatchers("/roles").hasAnyAuthority("admin", "manager")
+                            .requestMatchers("users/**").hasAnyAuthority("admin", "manager")
+                            .requestMatchers("/editmovie/**").hasAnyAuthority("admin", "manager","editor")
+                            .requestMatchers("/deletemovie/**").hasAuthority("admin")
+                            .requestMatchers("/edituser/**").hasAnyAuthority("admin", "manager")
+                            .requestMatchers("roles").hasAnyAuthority("admin", "manager")
+                            .anyRequest().authenticated()
+                            .and().exceptionHandling(handling -> handling.accessDeniedPage("/noaccess"))
+                            .formLogin(login -> login
+                                    .loginPage("/login")
+                                    .defaultSuccessUrl("/movies/1", true))
+                            .logout(logout -> logout
+                                    .invalidateHttpSession(true))
+                            .httpBasic(withDefaults());
 	            } catch (Exception e) {
 	                System.out.println(e.getMessage());
 	            }

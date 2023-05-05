@@ -27,23 +27,70 @@
       rel="canonical"
       href="https://v5.getbootstrap.com/docs/5.0/examples/navbar-bottom/"
     />
-     <link rel="stylesheet" type="text/css" th:href="@{/style/styles.css}" />
+    <style>
+      body{       
+        background-image: url(https://wallpaperset.com/w/full/6/d/3/366121.jpg);
+        background-attachment: fixed;
+        backdrop-filter: blur(3px); 
+        height: 100vh;       
+        display: flex;
+      }
+     
+      input{
+        height: 40px;
+      }
+      .pagenav{
+    position: fixed; 
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    padding: 10px;
+    
+    }
+    .nav-link{
+    color: white;
+    }
+    .nav-link:hover{
+    color:black;
+    background-color:#f8f9fa;
+    }
+    .section {   
+     
+      padding: 20px 10px; 
+      background-color: #f5f5f5;
+      box-shadow: 3px 15px 14px rgba(0, 0, 0, 0.1); 
+      background-image: url(https://img.freepik.com/premium-vector/hand-drawn-cute-doodle-illustration-design_90573-625.jpg?w=1060);
+      background-blend-mode:lighten; 
+      align-self: center;
+      
+    }
+    .action{
+    background-color: black;
+    color: oldlace;
+    }
+    .action:hover{
+    color: black!important;
+    background-color: transparent;
+    border: 1px solid black;
+    }
+      
+      </style>
   </head>
   <body>    
-      <nav class="navbar navbar-expand-sm">  
-        <div class="col-6">
-          <div class="container-fluid mx-auto">
-            <img
-              src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
-            />            
-          </div>
-        </div> 
-            
-      </nav>  
+     
   
-      <div class="container mb-5 w-75 section">
+      <div class="container section w-50">
+        <nav class="d-none d-sm-block">  
+         
+            <div class="container-fluid text-center">
+              <img
+                src="https://www.cct.ie/wp-content/uploads/CCT_Logo_New_Aug_17-289x100.png"
+              />            
+            </div>             
+        </nav>  
         
-	  	<form class="w-75 mx-auto my-auto py-3" th:action="@{/signup}" th:object="${user}" method="post">            
+	  	<form class="w-50 mx-auto my-auto mt-5 pb-2" th:action="@{/signup}" th:object="${user}" method="post">            
         <div th:if="${#fields.hasErrors('firstName') || #fields.hasErrors('lastName') || #fields.hasErrors('username') || #fields.hasErrors('email') || #fields.hasErrors('password')}" class="form-text alert alert-danger text-center mx-auto errorField">
           <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></br>
           <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></br>
@@ -68,17 +115,17 @@
          
           <input type="password" id="password" name="password" placeholder="Password" th:field="*{password}" autocomplete="off" class="form-control form-control-sm" >                
         </div>
-        <div class="text-center">		      
-        <button type="submit" class="btn btn-outline-success">Register</button>  
+        <div class="text-center">	
+        <button type="submit" class="btn btn-outline-success">Register</button>
+        <a th:href="@{/login}" class="btn action">Log in</a>
       </div>      
+           
+       
+      </div>
       </form>
 	 
-    </div>    
-		  
-		 <footer class="container text-center fixed-bottom">
-			<hr class="featurette-divider">		  
-		   <p>&copy; CCT College, Dublin. &middot;</p>
-		 </footer>
+    </div>   
+		
   </body>  
 </html>
 
