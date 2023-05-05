@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.web.dssapp.dto.UserDto;
 import com.web.dssapp.model.User;
+import com.web.dssapp.service.RoleService;
 import com.web.dssapp.service.UserService;
 import jakarta.validation.Valid;
 
@@ -22,7 +23,8 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private RoleService roleService;
 
 	@GetMapping("/edituser/{admin}&{id}")
 	public String editUser(@PathVariable("id") int id,@PathVariable("admin") int admin, Model model, RedirectAttributes redirAttrs) {
@@ -30,6 +32,7 @@ public class UserController {
 		if(oldUser != null){
 			if(admin==1){
 			model.addAttribute("user", oldUser.get());
+			model.addAttribute("allRoles", roleService.getAllRoles());
 			return "adminedituserpage";
 			}else{
 				model.addAttribute("user", oldUser.get());
