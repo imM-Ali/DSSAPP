@@ -48,16 +48,20 @@ public class AuthController {
 	public String registration(@Valid @ModelAttribute("user") UserDto user, BindingResult result, Model model) {
 		// by default, a new user has 'user' privilege
 		user.setRole_id(2);
+		// checks if there is any field is invalid
 		if (result.hasErrors()) {
 			return "signuppage";
 		}
-
-		User existing = userService.findByEmail(user.getEmail());
-		if (existing != null) {
+		User existingByEmail = userService.findByEmail(user.getEmail());
+		User existingByUserName = userService.findByusername(user.getUsername());
+		if (existingByEmail != null) {
 			result.rejectValue("email", null, "There is already an account registered with that email");
 			return "signuppage";
+		}else if(existingByUserName!=null) {
+			result.rejectValue("username", null, "There is already an account registered with that username");
+			return "signuppage";
 		}
-		// checks if there is any field is invalid
+		
 
 		userService.saveUser(user);
 		model.addAttribute("user", user);
