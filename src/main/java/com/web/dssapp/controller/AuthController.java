@@ -30,7 +30,7 @@ public class AuthController {
 			return"loginpage";
 		}
 
-		return "redirect:/";
+		return "redirect:/movies/1";
 	}	
 
 	// handler method to handle user registration request
