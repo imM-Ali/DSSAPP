@@ -6,6 +6,7 @@ import com.web.dssapp.model.User;
 import com.web.dssapp.repository.RoleRepository;
 import com.web.dssapp.repository.UserRepository;
 
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,14 +25,14 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private PasswordEncoder passwordEncoder;
-	
+
 	public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
 			PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.roleRepository = roleRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
-	
+
 
 	@Override
 	public void saveUser(UserDto user) {
@@ -40,8 +41,14 @@ public class UserServiceImpl implements UserService {
 		newUser.setLastName(user.getLastName());
 		newUser.setEmail(user.getEmail());
 		newUser.setUsername(user.getUsername());
-		newUser.set_id(maxid()+1);
-		// encrypt the password once we integrate spring security		
+		try{
+				newUser.set_id(maxid()+1);
+		}catch(AopInvocationException e){
+			newUser.set_id(1);
+        }
+
+		//newUser.set_id(maxid()+1);
+		// encrypt the password once we integrate spring security
 		newUser.setPassword(passwordEncoder.encode(user.getPassword()));
 
 		newUser.setRole_id(user.getRole_id());
@@ -59,7 +66,7 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByEmail(email);
 	}
 
-	
+
 	@Override
 	public Boolean updateUser(User user, UserDto userDto) {
 		try {
@@ -77,13 +84,13 @@ public class UserServiceImpl implements UserService {
 		}
 
 	}
-	
+
 	@Override
 	public Optional<User> findUserById (int id) {
 		return userRepository.findById(id);
-		
+
 	}
-	
+
 	@Override
 	public String deleteUserById(int id) {
 		try {
@@ -95,7 +102,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	
+
 	@Override
 	public int maxid() {
 		return userRepository.maxid();
